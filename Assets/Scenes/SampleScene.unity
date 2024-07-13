@@ -1143,7 +1143,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8633678809468872215, guid: 9d6edb4199386fb4aab5adc958cb6a52,
     type: 3}
   muzzleTransform: {fileID: 1255215034}
-  projectileForce: 25
+  projectileForce: 30
 --- !u!1 &439372031
 GameObject:
   m_ObjectHideFlags: 0
