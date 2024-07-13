@@ -1,61 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class gameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public GameObject startMenuPanel;
+    public GameObject inGameUIPanel;
+    public bool isGameActive = false;
+    public Button playButton; //this for the start button
+    public carMovement carMovement;
 
-    private void Awake()
+
+    // Start is called before the first frame update
+    private void Start()
     {
-        if (GameManager.instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        instance = this;
-        SceneManager.sceneLoaded += LoadState;
-        DontDestroyOnLoad(gameObject);
+        //Disable the game
+        DisableGameplay();
+        playButton.onClick.AddListener(PlayGame); //listener to play
     }
 
-    // Resources
-    public List<Sprite> playerSprites;
-    public List<Sprite> weaponSprites;
-    public List<int> weaponPrices;
-    public List<int> xpTable;
-
-    // References
-  
-    // public Weapon weapon;
-    public FloatingTextManager floatingTextManager;
-
-    //Logic
-    public int pesos;
-    public int experience;
-
-    //Floating text 
-    public void ShowText(string msg, int fontsize, Color color, Vector3 position, Vector3 motion, float duration)
+    public void PlayGame()
     {
-        floatingTextManager.Show(msg, fontsize, color, position, motion, duration);
+        //Enable the game, interactible
+        EnableGameplay();
+        startMenuPanel.SetActive(false);
+        inGameUIPanel.SetActive(true);
+        isGameActive = true;
     }
 
-    // Save state
-    /*
-     * INT preseredSkin
-     * INT pesos
-     * INT experience
-     * INT weaponLevel 
-     * 
-     */
+    private void DisableGameplay()
+    {
+        //Disable game objects and inputs
+        //Disable the player controller, camera, and any other interact elements
+        startMenuPanel.SetActive(true);
+        inGameUIPanel.SetActive(false);
+        
+        isGameActive=false;
+    }
 
-    public void SaveState()
+    private void EnableGameplay()
     {
-        Debug.Log("SaveState");
+        //Enable game objects and components here
+        //Enable the player controls and everything users use for the game
+        startMenuPanel.SetActive(false);
+        inGameUIPanel.SetActive(true);
     }
-    public void LoadState(Scene s, LoadSceneMode mode)
-    {
-        Debug.Log("LoadState");
-    }
+
 }

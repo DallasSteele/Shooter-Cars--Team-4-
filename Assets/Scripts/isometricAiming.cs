@@ -11,18 +11,17 @@ namespace BarthaSzabolcs.IsometricAiming
         [SerializeField] private LayerMask groundMask;
         [SerializeField] private GameObject projectilePrefab;
         [SerializeField] private Transform muzzleTransform;
-        [SerializeField] private float projectileForce = 1000f;
+        [SerializeField] private float projectileForce = 20f; // Adjust the force as needed
 
         #endregion
+
         #region Private Fields
 
         private Camera mainCamera;
 
         #endregion
-        
 
         #endregion
-
 
         #region Methods
 
@@ -38,12 +37,11 @@ namespace BarthaSzabolcs.IsometricAiming
         {
             Aim();
 
-            //shoot input
-        if (Input.GetButtonDown("Fire1"))
+            // Shoot input
+            if (Input.GetButtonDown("Fire1"))
             {
                 Shoot();
             }
-
         }
 
         #endregion
@@ -56,13 +54,6 @@ namespace BarthaSzabolcs.IsometricAiming
                 // Calculate the direction
                 var direction = position - transform.position;
 
-                // You might want to delete this line.
-                // Ignore the height difference.
-                //direction.y = 0;
-                //actually, we need the height difference
-                //nevermind
-                //wait, actually...
-
                 // Make the transform look in the direction.
                 transform.forward = direction;
             }
@@ -70,14 +61,18 @@ namespace BarthaSzabolcs.IsometricAiming
 
         private void Shoot()
         {
-            // Store the current forward direction
-            Vector3 currentForward = muzzleTransform.forward;
+            // Get the muzzle position and forward direction
+            Vector3 muzzlePosition = muzzleTransform.position;
+            Vector3 muzzleForward = muzzleTransform.forward;
 
-            // Instantiate a projectile
-            GameObject projectile = Instantiate(projectilePrefab, muzzleTransform.position, Quaternion.identity);
+            // Instantiate the projectile at the muzzle position and rotation
+            GameObject projectile = Instantiate(projectilePrefab, muzzlePosition, Quaternion.LookRotation(muzzleForward));
 
-            // Apply force to the projectile
-            projectile.GetComponent<Rigidbody>().AddForce(transform.forward * projectileForce, ForceMode.Impulse);
+            // Get the Rigidbody component of the projectile
+            Rigidbody projectileRigidbody = projectile.GetComponent<Rigidbody>();
+
+            // Set the projectile's velocity to a fixed value
+            projectileRigidbody.velocity = muzzleForward * projectileForce;
         }
 
         private (bool success, Vector3 position) GetMousePosition()

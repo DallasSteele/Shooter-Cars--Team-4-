@@ -17,6 +17,7 @@ public class carMovement : MonoBehaviour
 
     private float currentXPosition;
     private float lastInputTime = -1f;
+    private gameManager gameManager;
 
     void Start()
     {
@@ -25,12 +26,18 @@ public class carMovement : MonoBehaviour
         // Add listeners to the buttons
         leftButton.onClick.AddListener(SideStepLeft);
         rightButton.onClick.AddListener(SideStepRight);
+        //Call the game manager
+        gameManager = FindObjectOfType<gameManager>();
     }
 
     void Update()
     {
-        // Move the car forward automatically
-        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+        //Player input handling code here
+        if (gameManager.isGameActive)
+        {
+            // Move the car forward automatically
+            transform.Translate(Vector3.forward * moveSpeed * Time.fixedDeltaTime);
+        }
     }
 
     private void SideStepLeft()
