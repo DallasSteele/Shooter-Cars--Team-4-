@@ -3614,10 +3614,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!65 &1779814511
 BoxCollider:
@@ -3811,6 +3811,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: sedan-sports
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ec9c1193e0c1cc74a86ab43a2d52db4b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ec9c1193e0c1cc74a86ab43a2d52db4b,
         type: 3}
