@@ -2283,7 +2283,7 @@ MonoBehaviour:
   target: {fileID: 1779814509}
   distance: 9.89
   height: 2.91
-  smoothTime: 0.0012
+  smoothTime: 0
   cameraRotationX: 19.6
 --- !u!1 &985816063
 GameObject:
@@ -3423,7 +3423,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1398786741}
   m_Layer: 0
-  m_Name: Car
+  m_Name: Game Scene Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4684,11 +4684,11 @@ RectTransform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 708305497}
   - {fileID: 963194228}
   - {fileID: 705507995}
   - {fileID: 1398786741}
   - {fileID: 985911578}
   - {fileID: 2077991474}
   - {fileID: 1160581140}
+  - {fileID: 708305497}
   - {fileID: 990668777}
