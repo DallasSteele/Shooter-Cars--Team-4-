@@ -62,6 +62,19 @@ namespace HW.Boot
             Instance = this;
         }
 
+        private void OnEnable()
+        {
+            // Subscribe event to GameManager
+            GameManager.Instance.OnGameStart += InitializedPool;
+        }
+
+        private void OnDisable()
+        {
+            // Unsubscribe event from GameManager
+            GameManager.Instance.OnGameStart -= InitializedPool;
+        }
+
+        #region privateMethods
         /// <summary>
         /// Initilaize the first pool once game starting by GameManager
         /// </summary>
@@ -95,9 +108,13 @@ namespace HW.Boot
         /// Get the object out from the pool
         /// </summary>
         /// <param name="pool">Object pooling queue variable used</param>
+        /// <param name="objectPrefab">Object to instantiate in the pool</param>
+        /// <param name="objectParent">Parent of all the objects inside the pool</param>
         /// <returns>Object taken from the pool</returns>
-        public GameObject GetObject(Queue<GameObject> pool)
+        private  GameObject GetObject(Queue<GameObject> pool, GameObject objectPrefab, GameObject objectParent)
         {
+            if(pool.Count == 0) CreatePool(objectPrefab, objectParent, pool);
+
             GameObject objectPool = pool.Dequeue();
             objectPool.SetActive(true);
             return objectPool;
@@ -113,17 +130,24 @@ namespace HW.Boot
             objectPool.SetActive(false);
             pool.Enqueue(objectPool);
         }
+        #endregion
 
-        private void OnEnable()
+        /// <summary>
+        /// Get the enemy object out from the enemy's pool
+        /// </summary>
+        /// <returns>Enemy object taken from the enemy's pool</returns>
+        public GameObject GetEnemy()
         {
-            // Subscribe event to GameManager
-            GameManager.Instance.OnGameStart += InitializedPool;
+            return GetObject(m_EnemiesPool, m_EnemyPrefab, m_EnemyList);
         }
 
-        private void OnDisable()
+        /// <summary>
+        /// Get the bullet object out from the enemy's pool
+        /// </summary>
+        /// <returns>Bullet object taken from the bullet's pool</returns>
+        public GameObject GetBullet()
         {
-            // Unsubscribe event from GameManager
-            GameManager.Instance.OnGameStart -= InitializedPool;
+            return GetObject(m_BulletPool, m_BulletPrefab, m_BulletList);
         }
     }
 }

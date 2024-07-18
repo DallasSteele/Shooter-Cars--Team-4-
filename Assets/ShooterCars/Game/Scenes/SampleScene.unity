@@ -3423,7 +3423,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1398786741}
   m_Layer: 0
-  m_Name: Game Scene Controller
+  m_Name: Car
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
