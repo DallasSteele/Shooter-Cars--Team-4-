@@ -28,7 +28,7 @@ public class gameManager : MonoBehaviour
         startMenuPanel.SetActive(false);
         inGameUIPanel.SetActive(true);
         isGameActive = true;
-        HW.Boot.GameManager.Instance.OnGameStart?.Invoke();
+        ShooterCar.Manager.GameController.Instance.OnGameStart?.Invoke();
     }
 
     private void DisableGameplay()

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace HW.Boot
+namespace ShooterCar.Manager
 {
     public class ObjectPooling : MonoBehaviour
     {
@@ -41,9 +41,12 @@ namespace HW.Boot
         [SerializeField] private GameObject m_BulletList;
 
         /// <summary>
-        /// All object pooling queue variables
+        /// Pool variable for enemy
         /// </summary>
         private Queue<GameObject> m_EnemiesPool = new Queue<GameObject>();
+        /// <summary>
+        /// Pool variable for bullet
+        /// </summary>
         private Queue<GameObject> m_BulletPool = new Queue<GameObject>();
 
         /// <summary>
@@ -65,13 +68,13 @@ namespace HW.Boot
         private void OnEnable()
         {
             // Subscribe event to GameManager
-            GameManager.Instance.OnGameStart += InitializedPool;
+            GameController.Instance.OnGameStart += InitializedPool;
         }
 
         private void OnDisable()
         {
             // Unsubscribe event from GameManager
-            GameManager.Instance.OnGameStart -= InitializedPool;
+            GameController.Instance.OnGameStart -= InitializedPool;
         }
 
         #region privateMethods
