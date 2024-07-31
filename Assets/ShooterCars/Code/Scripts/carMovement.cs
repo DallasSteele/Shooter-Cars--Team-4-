@@ -19,6 +19,8 @@ public class carMovement : MonoBehaviour
     private float lastInputTime = -1f;
     private gameManager gameManager;
 
+    [SerializeField] Transform m_Player;
+
     void Start()
     {
         currentXPosition = 0f;
@@ -36,7 +38,7 @@ public class carMovement : MonoBehaviour
         if (gameManager.isGameActive)
         {
             // Move the car forward automatically
-            transform.Translate(Vector3.forward * moveSpeed * Time.fixedDeltaTime);
+            //transform.Translate(Vector3.forward * moveSpeed * Time.fixedDeltaTime);
         }
     }
 
@@ -75,13 +77,13 @@ public class carMovement : MonoBehaviour
         {
             float interpolation = SmoothStep(0f, 1f, elapsedTime / 1f);
             currentXPosition = Mathf.Lerp(startPosition, targetXPosition, interpolation);
-            transform.position = new Vector3(currentXPosition, transform.position.y, transform.position.z);
+            m_Player.position = new Vector3(currentXPosition, m_Player.position.y, m_Player.position.z);
             elapsedTime += Time.deltaTime * sideStepSpeed;
             yield return null;
         }
 
         currentXPosition = targetXPosition;
-        transform.position = new Vector3(currentXPosition, transform.position.y, transform.position.z);
+        m_Player.position = new Vector3(currentXPosition, m_Player.position.y, m_Player.position.z);
     }
 
     private float SmoothStep(float start, float end, float value)

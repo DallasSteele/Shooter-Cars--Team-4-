@@ -53,6 +53,7 @@ namespace ShooterCar.Manager
         /// Single Instance for easy call this class from entire project
         /// </summary>
         public static ObjectPooling Instance { get; private set; }
+        public float EnemiesAmount { get {  return m_EnemiesAmount; } }
 
         private void Awake()
         {
@@ -77,7 +78,7 @@ namespace ShooterCar.Manager
             GameController.Instance.OnGameStart -= InitializedPool;
         }
 
-        #region privateMethods
+        #region Private Methods
         /// <summary>
         /// Initilaize the first pool once game starting by GameManager
         /// </summary>
@@ -151,6 +152,16 @@ namespace ShooterCar.Manager
         public GameObject GetBullet()
         {
             return GetObject(m_BulletPool, m_BulletPrefab, m_BulletList);
+        }
+
+        public void ReturnBullet(GameObject bullet)
+        {
+            ReturnObject(bullet, m_BulletPool);
+        }
+
+        public void ReturnEnemy(GameObject enemy)
+        {
+            ReturnObject(enemy, m_EnemiesPool);
         }
     }
 }

@@ -1,5 +1,8 @@
 using UnityEngine;
 
+using ShooterCar.Manager;
+using ShooterCar.Utilities;
+
 namespace BarthaSzabolcs.IsometricAiming
 {
     public class isometricAiming : MonoBehaviour
@@ -17,7 +20,10 @@ namespace BarthaSzabolcs.IsometricAiming
 
         #region Private Fields
 
+        [SerializeField] private Vector3 m_Offset;
+
         private Camera mainCamera;
+        private RaycastHit hit;
 
         #endregion
 
@@ -66,29 +72,43 @@ namespace BarthaSzabolcs.IsometricAiming
             Vector3 muzzleForward = muzzleTransform.forward;
 
             // Instantiate the projectile at the muzzle position and rotation
-            GameObject projectile = Instantiate(projectilePrefab, muzzlePosition, Quaternion.LookRotation(muzzleForward));
+            //GameObject projectile = Instantiate(projectilePrefab, muzzlePosition, Quaternion.LookRotation(muzzleForward));
+            GameObject projectile = ObjectPooling.Instance.GetBullet();
+            projectile.transform.position = transform.position;
+            Projectile bullet = projectile.GetComponent<Projectile>();
+            //bullet.IgnoreObject = transform.parent.gameObject;
+            //bullet.Offset = m_Offset;
+            //bullet.Direction = Vector3.zero + m_Offset - transform.position;
+            bullet.Muzzle = transform;
+            projectile.transform.rotation = Quaternion.LookRotation(muzzleForward);
 
             // Get the Rigidbody component of the projectile
-            Rigidbody projectileRigidbody = projectile.GetComponent<Rigidbody>();
+            //Rigidbody projectileRigidbody = projectile.GetComponent<Rigidbody>();
 
             // Set the projectile's velocity to a fixed value
-            projectileRigidbody.velocity = muzzleForward * projectileForce;
+            //projectileRigidbody.velocity = muzzleForward * projectileForce;
         }
 
         private (bool success, Vector3 position) GetMousePosition()
         {
             var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, groundMask))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundMask))
             {
+                Debug.DrawLine(transform.position, hit.point, Color.red);
                 // The Raycast hit something, return with the position.
-                return (success: true, position: hitInfo.point);
+                return (success: true, position: hit.point);
             }
             else
             {
                 // The Raycast did not hit anything.
                 return (success: false, position: Vector3.zero);
             }
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
         }
 
         #endregion

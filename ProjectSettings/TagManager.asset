@@ -12,9 +12,9 @@ TagManager:
   - Bullet
   - Water
   - UI
-  - Ground
+  - GameController
   - Player
-  - 
+  - Enemy
   - 
   - 
   - 
