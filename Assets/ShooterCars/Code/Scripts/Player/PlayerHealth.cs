@@ -12,7 +12,7 @@ namespace ShooterCar.Player
             m_CurrentHealth = m_MaxHP;
         }
 
-        void IDamageable.TakeDamage(float damage)
+        public void TakeDamage(float damage)
         {
             m_CurrentHealth -= damage;
         }

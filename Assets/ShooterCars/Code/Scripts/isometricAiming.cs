@@ -41,6 +41,8 @@ namespace BarthaSzabolcs.IsometricAiming
 
         private void Update()
         {
+            if (GameController.Instance.HoverButton) return;
+
             Aim();
 
             // Shoot input
@@ -80,6 +82,7 @@ namespace BarthaSzabolcs.IsometricAiming
             //bullet.Offset = m_Offset;
             //bullet.Direction = Vector3.zero + m_Offset - transform.position;
             bullet.Muzzle = transform;
+            bullet.IgnoreObject = gameObject.tag;
             projectile.transform.rotation = Quaternion.LookRotation(muzzleForward);
 
             // Get the Rigidbody component of the projectile
@@ -105,12 +108,6 @@ namespace BarthaSzabolcs.IsometricAiming
                 return (success: false, position: Vector3.zero);
             }
         }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-        }
-
         #endregion
     }
 }

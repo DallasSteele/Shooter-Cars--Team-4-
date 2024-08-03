@@ -16,8 +16,7 @@ namespace ShooterCar.Manager
         public static GameController Instance { get; private set; }
         public Camera MainCamera { get { return m_MainCam; } }
         public GameObject Player { get { return m_PlayerObject; } }
-        public Vector3 Offset { get { return m_Offset; } }
-        public bool HoverMouse { get; set; }
+        public bool HoverButton { get; set; }
 
         private void Awake()
         {

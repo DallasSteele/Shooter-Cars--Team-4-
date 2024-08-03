@@ -32,8 +32,7 @@ namespace ShooterCar.Enemy
             bullet.transform.LookAt(GameController.Instance.Player.transform);
             Projectile projectile = bullet.GetComponent<Projectile>();
             projectile.Muzzle = m_Muzzle;
-            projectile.Direction = -bullet.transform.TransformDirection(transform.forward) * 2;
-            
+            projectile.IgnoreObject = gameObject.tag;            
             //projectile.IgnoreObject =  //Objek yang memiliki komponen Enemy.cs
         }
 

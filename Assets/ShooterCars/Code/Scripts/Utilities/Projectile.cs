@@ -1,5 +1,3 @@
-using System.Collections;
-
 using UnityEngine;
 
 using ShooterCar.Manager;
@@ -11,35 +9,40 @@ namespace ShooterCar.Utilities
         //#serialization
         [SerializeField] private float lifetime = 5f;
         [SerializeField] private float damage = 10f;
+        [SerializeField] private TrailRenderer m_Trail;
 
-        public GameObject IgnoreObject { get; set; }
+        private float m_LongLife;
+
+        public string IgnoreObject { get; set; } = "";
         public Transform Muzzle { get; set; }
-        public RaycastHit Hit { get; set; }
-        public Vector3 Offset;
-        public Vector3 Direction { get; set; }
-
-        private void Start()
-        {
-            StartCoroutine(LifeTime());
-        }
 
         private void Update()
         {
+            if(m_LongLife < lifetime)
+            {
+                m_LongLife += Time.deltaTime;
+            }
+            else
+            {
+                m_LongLife = 0;
+                ReturnBullet();
+            }
+
             if (Muzzle == null) return;
             transform.position += transform.forward * 10 * Time.deltaTime;
             //transform.Translate(Direction * Time.deltaTime);
             //transform.position = Vector3.MoveTowards(Muzzle.position, Hit.point, 50 * Time.deltaTime);
         }
 
-        private IEnumerator LifeTime()
+        private void OnEnable()
         {
-            yield return new WaitForSeconds(lifetime);
-            ReturnBullet("dah lama cuy");
+            m_Trail.time = .5f;
+            m_Trail.emitting = true;
         }
 
         private void OnCollisionEnter(Collision collision)
         {
-            //if (IgnoreObject != null && collision.gameObject == IgnoreObject) return;
+            if (collision.collider.CompareTag(IgnoreObject)) return;
             ReturnBullet("Kena " + collision.collider.name);
             if(collision.collider.TryGetComponent<IDamageable>(out var damageable))
             {
@@ -50,6 +53,10 @@ namespace ShooterCar.Utilities
         private void ReturnBullet(string x = null)
         {
             if (x != null) Debug.LogWarning(x);
+
+            m_Trail.time = 0;
+            m_Trail.emitting = false;
+            m_Trail.Clear();
             ObjectPooling.Instance.ReturnBullet(gameObject);
         }
     }

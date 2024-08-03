@@ -410,7 +410,7 @@ MonoBehaviour:
   m_EnemiesAmount: 3
   m_EnemyPrefab: {fileID: 6718596833257775620, guid: 59831aba29feaba42a177775e1eac405, type: 3}
   m_EnemyList: {fileID: 1741136540}
-  m_BulletAmount: 10
+  m_BulletAmount: 20
   m_BulletPrefab: {fileID: 8633678809468872215, guid: 9d6edb4199386fb4aab5adc958cb6a52, type: 3}
   m_BulletList: {fileID: 2123268459}
 --- !u!1 &63320874
@@ -1124,6 +1124,7 @@ GameObject:
   - component: {fileID: 264115034}
   - component: {fileID: 264115033}
   - component: {fileID: 264115036}
+  - component: {fileID: 264115037}
   m_Layer: 5
   m_Name: Left
   m_TagString: Untagged
@@ -1246,10 +1247,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates:
-  - eventID: 0
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls: []
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &264115037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264115031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cb90e7cba7dce14ba9ca7aaf3393106, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &278807767 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9cde77f6e38aa17459dc229286545504, type: 3}
@@ -2143,6 +2160,7 @@ GameObject:
   - component: {fileID: 762021786}
   - component: {fileID: 762021785}
   - component: {fileID: 762021784}
+  - component: {fileID: 762021787}
   m_Layer: 5
   m_Name: startButton
   m_TagString: Untagged
@@ -2252,6 +2270,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 762021782}
   m_CullTransparentMesh: 1
+--- !u!114 &762021787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762021782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cb90e7cba7dce14ba9ca7aaf3393106, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &818944297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2319,6 +2349,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9cde77f6e38aa17459dc229286545504, type: 3}
       propertyPath: m_Name
       value: rocketlauncherSide
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9cde77f6e38aa17459dc229286545504, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2891,6 +2925,7 @@ GameObject:
   - component: {fileID: 1046863953}
   - component: {fileID: 1046863952}
   - component: {fileID: 1046863955}
+  - component: {fileID: 1046863956}
   m_Layer: 5
   m_Name: Right
   m_TagString: Untagged
@@ -3013,10 +3048,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates:
-  - eventID: 0
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls: []
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &1046863956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046863950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cb90e7cba7dce14ba9ca7aaf3393106, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1092620659
 GameObject:
   m_ObjectHideFlags: 0
