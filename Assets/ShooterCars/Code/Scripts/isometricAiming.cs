@@ -12,15 +12,11 @@ namespace BarthaSzabolcs.IsometricAiming
         #region Editor Settings
 
         [SerializeField] private LayerMask groundMask;
-        [SerializeField] private GameObject projectilePrefab;
         [SerializeField] private Transform muzzleTransform;
-        [SerializeField] private float projectileForce = 20f; // Adjust the force as needed
 
         #endregion
 
         #region Private Fields
-
-        [SerializeField] private Vector3 m_Offset;
 
         private Camera mainCamera;
         private RaycastHit hit;
@@ -76,7 +72,7 @@ namespace BarthaSzabolcs.IsometricAiming
             // Instantiate the projectile at the muzzle position and rotation
             //GameObject projectile = Instantiate(projectilePrefab, muzzlePosition, Quaternion.LookRotation(muzzleForward));
             GameObject projectile = ObjectPooling.Instance.GetBullet();
-            projectile.transform.position = transform.position;
+            projectile.transform.position = muzzlePosition;
             Projectile bullet = projectile.GetComponent<Projectile>();
             //bullet.IgnoreObject = transform.parent.gameObject;
             //bullet.Offset = m_Offset;
