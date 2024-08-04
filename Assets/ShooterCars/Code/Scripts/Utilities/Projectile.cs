@@ -9,6 +9,7 @@ namespace ShooterCar.Utilities
         //#serialization
         [SerializeField] private float lifetime = 5f;
         [SerializeField] private float damage = 10f;
+        [SerializeField] private float m_BulletSpeed;
         [SerializeField] private TrailRenderer m_Trail;
 
         private float m_LongLife;
@@ -24,18 +25,18 @@ namespace ShooterCar.Utilities
             }
             else
             {
-                m_LongLife = 0;
                 ReturnBullet();
             }
 
             if (Muzzle == null) return;
-            transform.position += transform.forward * 10 * Time.deltaTime;
+            transform.position += transform.forward * m_BulletSpeed * Time.deltaTime;
             //transform.Translate(Direction * Time.deltaTime);
             //transform.position = Vector3.MoveTowards(Muzzle.position, Hit.point, 50 * Time.deltaTime);
         }
 
         private void OnEnable()
         {
+            m_Trail.Clear();
             m_Trail.time = .5f;
             m_Trail.emitting = true;
         }
@@ -54,6 +55,7 @@ namespace ShooterCar.Utilities
         {
             if (x != null) Debug.LogWarning(x);
 
+            m_LongLife = 0;
             m_Trail.time = 0;
             m_Trail.emitting = false;
             m_Trail.Clear();

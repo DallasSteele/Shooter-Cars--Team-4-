@@ -8,10 +8,10 @@ namespace ShooterCar.Manager
         [SerializeField] private GameObject m_PlayerObject;
         [SerializeField] private Vector3 m_Offset;
 
-        public delegate void Action();
-        public Action OnGameStart { get; set; }
-        public Action OnGameOver { get; set; }
-        public Action OnEnemyDestroy { get; set; }
+        public delegate void GameAction();
+        public GameAction OnGameStart { get; set; }
+        public GameAction OnGameOver { get; set; }
+        public GameAction OnEnemyDestroy { get; set; }
 
         public static GameController Instance { get; private set; }
         public Camera MainCamera { get { return m_MainCam; } }

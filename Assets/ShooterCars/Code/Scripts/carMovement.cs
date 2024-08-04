@@ -26,8 +26,8 @@ public class carMovement : MonoBehaviour
         currentXPosition = 0f;
 
         // Add listeners to the buttons
-        leftButton.onClick.AddListener(SideStepLeft);
-        rightButton.onClick.AddListener(SideStepRight);
+        leftButton.onClick.AddListener(SideStepRight);
+        rightButton.onClick.AddListener(SideStepLeft);
         //Call the game manager
         gameManager = FindObjectOfType<gameManager>();
     }

@@ -5,14 +5,24 @@ using ShooterCar.Utilities;
 
 namespace ShooterCar.Enemy
 {
-    public class Enemy : MonoBehaviour
+    public class EnemyShoot : MonoBehaviour
     {
         [SerializeField] private Transform m_Muzzle;
         [SerializeField] private float m_FireCooldown;
 
         private float m_FireInterval;
 
+        private void Start()
+        {
+            m_FireInterval = 2;
+        }
+
         private void Update()
+        {
+            ShootingLoop();
+        }
+
+        private void ShootingLoop()
         {
             if(m_FireInterval <= 0)
             {
@@ -33,12 +43,6 @@ namespace ShooterCar.Enemy
             Projectile projectile = bullet.GetComponent<Projectile>();
             projectile.Muzzle = m_Muzzle;
             projectile.IgnoreObject = gameObject.tag;            
-            //projectile.IgnoreObject =  //Objek yang memiliki komponen Enemy.cs
-        }
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            ObjectPooling.Instance.ReturnEnemy(gameObject);
         }
     }
 }
