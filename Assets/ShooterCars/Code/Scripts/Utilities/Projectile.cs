@@ -7,16 +7,14 @@ namespace ShooterCar.Utilities
     public class Projectile : MonoBehaviour
     {
         //#serialization
+        [SerializeField] private TrailRenderer m_Trail;
         [SerializeField] private float lifetime = 5f;
         [SerializeField] private float damage = 10f;
         [SerializeField] private float m_BulletSpeed;
-        [SerializeField] private TrailRenderer m_Trail;
 
+        private Transform m_Muzzle;
         private float m_LongLife;
-        private bool isOn;
-
-        public string IgnoreObject { get; set; } = "";
-        public Transform Muzzle { get; set; }
+        private string IgnoreObject = "";
 
         private void Update()
         {
@@ -29,7 +27,6 @@ namespace ShooterCar.Utilities
                 ReturnBullet();
             }
 
-            //if (isOn)
             transform.position += m_BulletSpeed * Time.deltaTime * transform.forward;
             //transform.Translate(-transform.forward * m_BulletSpeed * Time.deltaTime);
             //transform.position = Vector3.MoveTowards(Muzzle.position, Hit.point, 50 * Time.deltaTime);
@@ -45,12 +42,12 @@ namespace ShooterCar.Utilities
             }
         }
 
-        public void Shoot(Transform muzzle, Vector3 target)
+        public void Shoot(Transform muzzle, Vector3 target, string ignoreObject)
         {
-            Muzzle = muzzle;
+            m_Muzzle = muzzle;
             transform.position = muzzle.position;
             transform.LookAt(target);
-            //isOn = true;
+            IgnoreObject = ignoreObject;
         }
 
         private void ReturnBullet(string x = null)

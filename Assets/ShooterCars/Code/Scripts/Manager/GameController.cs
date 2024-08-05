@@ -11,6 +11,7 @@ namespace ShooterCar.Manager
         public delegate void GameAction();
         public GameAction OnGameStart { get; set; }
         public GameAction OnGameOver { get; set; }
+        public GameAction OnFire { get; set; }
         public GameAction OnEnemyDestroy { get; set; }
 
         public static GameController Instance { get; private set; }

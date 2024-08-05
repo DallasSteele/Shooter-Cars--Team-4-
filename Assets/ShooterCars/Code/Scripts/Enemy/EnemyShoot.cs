@@ -43,11 +43,8 @@ namespace ShooterCar.Enemy
         private void Fire()
         {
             GameObject bullet = ObjectPooling.Instance.GetBullet();
-            bullet.transform.position = m_Muzzle.position;
-            bullet.transform.LookAt(GameController.Instance.Player.transform);
             Projectile projectile = bullet.GetComponent<Projectile>();
-            projectile.Muzzle = m_Muzzle;
-            projectile.IgnoreObject = gameObject.tag;            
+            projectile.Shoot(m_Muzzle, GameController.Instance.Player.transform.position, gameObject.tag);
         }
     }
 }

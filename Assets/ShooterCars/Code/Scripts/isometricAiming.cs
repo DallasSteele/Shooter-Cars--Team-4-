@@ -13,6 +13,7 @@ namespace BarthaSzabolcs.IsometricAiming
 
         [SerializeField] private LayerMask groundMask;
         [SerializeField] private Transform muzzleTransform;
+        [SerializeField] private float m_FireRate;
 
         #endregion
 
@@ -20,6 +21,7 @@ namespace BarthaSzabolcs.IsometricAiming
 
         private Camera mainCamera;
         private RaycastHit hit;
+        private float m_NextShot;
 
         #endregion
 
@@ -42,10 +44,24 @@ namespace BarthaSzabolcs.IsometricAiming
             Aim();
 
             // Shoot input
-            if (Input.GetButtonDown("Fire1"))
+            if(Time.time >= m_NextShot)
             {
-                Shoot();
+                if (Input.GetButton("Fire1"))
+                {
+                    GameController.Instance.OnFire?.Invoke();
+                    m_NextShot = Time.time + 1 / m_FireRate;
+                }
             }
+        }
+
+        private void OnEnable()
+        {
+            GameController.Instance.OnFire += Shoot;
+        }
+
+        private void OnDisable()
+        {
+            GameController.Instance.OnFire -= Shoot;
         }
 
         #endregion
@@ -74,12 +90,11 @@ namespace BarthaSzabolcs.IsometricAiming
             GameObject projectile = ObjectPooling.Instance.GetBullet();
             //projectile.transform.position = muzzlePosition;
             Projectile bullet = projectile.GetComponent<Projectile>();
-            bullet.Shoot(muzzleTransform, hit.point);
+            bullet.Shoot(muzzleTransform, hit.point, gameObject.tag);
             //bullet.IgnoreObject = transform.parent.gameObject;
             //bullet.Offset = m_Offset;
             //bullet.Direction = Vector3.zero + m_Offset - transform.position;
             //bullet.Muzzle = transform;
-            bullet.IgnoreObject = gameObject.tag;
             //projectile.SetActive(true);
 
             // Get the Rigidbody component of the projectile
