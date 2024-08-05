@@ -72,14 +72,15 @@ namespace BarthaSzabolcs.IsometricAiming
             // Instantiate the projectile at the muzzle position and rotation
             //GameObject projectile = Instantiate(projectilePrefab, muzzlePosition, Quaternion.LookRotation(muzzleForward));
             GameObject projectile = ObjectPooling.Instance.GetBullet();
-            projectile.transform.position = muzzlePosition;
+            //projectile.transform.position = muzzlePosition;
             Projectile bullet = projectile.GetComponent<Projectile>();
+            bullet.Shoot(muzzleTransform, hit.point);
             //bullet.IgnoreObject = transform.parent.gameObject;
             //bullet.Offset = m_Offset;
             //bullet.Direction = Vector3.zero + m_Offset - transform.position;
-            bullet.Muzzle = transform;
+            //bullet.Muzzle = transform;
             bullet.IgnoreObject = gameObject.tag;
-            projectile.transform.rotation = Quaternion.LookRotation(muzzleForward);
+            //projectile.SetActive(true);
 
             // Get the Rigidbody component of the projectile
             //Rigidbody projectileRigidbody = projectile.GetComponent<Rigidbody>();
@@ -92,7 +93,7 @@ namespace BarthaSzabolcs.IsometricAiming
         {
             var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundMask))
+            if (Physics.Raycast(ray, out hit, 100, groundMask))
             {
                 Debug.DrawLine(transform.position, hit.point, Color.red);
                 // The Raycast hit something, return with the position.
@@ -101,7 +102,10 @@ namespace BarthaSzabolcs.IsometricAiming
             else
             {
                 // The Raycast did not hit anything.
-                return (success: false, position: Vector3.zero);
+                //return (success: false, position: Vector3.zero);
+                Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
+                // The Raycast did not hit anything.
+                return (success: false, position: ray.origin + ray.direction * 100);
             }
         }
         #endregion

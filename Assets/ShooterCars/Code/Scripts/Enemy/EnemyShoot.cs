@@ -35,6 +35,11 @@ namespace ShooterCar.Enemy
             }
         }
 
+        private void MuzzleFacingPlayer()
+        {
+            m_Muzzle.transform.LookAt(GameController.Instance.Player.transform.position);
+        }
+
         private void Fire()
         {
             GameObject bullet = ObjectPooling.Instance.GetBullet();
