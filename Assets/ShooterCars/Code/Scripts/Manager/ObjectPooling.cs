@@ -53,7 +53,10 @@ namespace ShooterCar.Manager
         /// Single Instance for easy call this class from entire project
         /// </summary>
         public static ObjectPooling Instance { get; private set; }
-        public float EnemiesAmount { get {  return m_EnemiesAmount; } }
+        /// <summary>
+        /// Amount of enemies spawned once, object pooling pattern used
+        /// </summary>
+        public float EnemiesAmount { get { return m_EnemiesAmount; } }
 
         private void Awake()
         {
@@ -91,7 +94,7 @@ namespace ShooterCar.Manager
 
             for (int i = 0; i < m_BulletAmount; i++)
             {
-                CreatePool(m_BulletPrefab, m_BulletList, m_BulletPool);
+                CreatePool(GameController.Instance.WeaponData.GetProjectile().gameObject, m_BulletList, m_BulletPool);
             }
         }
 

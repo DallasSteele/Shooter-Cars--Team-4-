@@ -9,12 +9,10 @@ namespace ShooterCar.Utilities
         //#serialization
         [SerializeField] private TrailRenderer m_Trail;
         [SerializeField] private float lifetime = 5f;
-        [SerializeField] private float damage = 10f;
         [SerializeField] private float m_BulletSpeed;
 
-        private Transform m_Muzzle;
-        private float m_LongLife;
-        private string IgnoreObject = "";
+        private float m_LongLife, m_DamageAmount;
+        private string m_IgnoreObject = "";
 
         private void Update()
         {
@@ -34,7 +32,7 @@ namespace ShooterCar.Utilities
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.collider.CompareTag(IgnoreObject)) return;
+            if (collision.collider.CompareTag(m_IgnoreObject)) return;
             ReturnBullet("Kena " + collision.collider.name);
             if(collision.collider.TryGetComponent<IDamageable>(out var damageable))
             {
@@ -42,12 +40,17 @@ namespace ShooterCar.Utilities
             }
         }
 
+        public void Initialize(float damageAmount, float bulletSpeed)
+        {
+            m_DamageAmount = damageAmount;
+            m_BulletSpeed = bulletSpeed;
+        }
+
         public void Shoot(Transform muzzle, Vector3 target, string ignoreObject)
         {
-            m_Muzzle = muzzle;
             transform.position = muzzle.position;
             transform.LookAt(target);
-            IgnoreObject = ignoreObject;
+            m_IgnoreObject = ignoreObject;
         }
 
         private void ReturnBullet(string x = null)

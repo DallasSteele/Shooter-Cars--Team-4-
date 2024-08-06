@@ -1,12 +1,13 @@
 using UnityEngine;
 
+using ShooterCar.SO;
+
 namespace ShooterCar.Manager
 {
     public class GameController : MonoBehaviour
     {
-        [SerializeField] private Camera m_MainCam;
         [SerializeField] private GameObject m_PlayerObject;
-        [SerializeField] private Vector3 m_Offset;
+        [SerializeField] private Weapon m_Weapon;
 
         public delegate void GameAction();
         public GameAction OnGameStart { get; set; }
@@ -15,7 +16,6 @@ namespace ShooterCar.Manager
         public GameAction OnEnemyDestroy { get; set; }
 
         public static GameController Instance { get; private set; }
-        public Camera MainCamera { get { return m_MainCam; } }
         public GameObject Player { get { return m_PlayerObject; } }
         public bool HoverButton { get; set; }
 
@@ -28,6 +28,15 @@ namespace ShooterCar.Manager
             }
 
             Instance = this;
+        }
+
+        public Weapon WeaponData
+        {
+            get { return m_Weapon; }
+            private set
+            {
+                m_Weapon = value;
+            }
         }
     }
 }

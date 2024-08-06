@@ -4,8 +4,6 @@ using UnityEngine;
 
 using ShooterCar.Manager;
 
-using DG.Tweening;
-
 namespace ShooterCar.Enemy
 {
     public class EnemySpawner : MonoBehaviour
@@ -20,13 +18,13 @@ namespace ShooterCar.Enemy
         private void OnEnable()
         {
             GameController.Instance.OnGameStart += SetInitialEnemy;
-            GameController.Instance.OnEnemyDestroy += SetEnemyPosition;
+            GameController.Instance.OnEnemyDestroy += ReproduceEnemy;
         }
 
         private void OnDisable()
         {
             GameController.Instance.OnGameStart -= SetInitialEnemy;
-            GameController.Instance.OnEnemyDestroy -= SetEnemyPosition;
+            GameController.Instance.OnEnemyDestroy -= ReproduceEnemy;
         }
 
         private void SetInitialEnemy()
@@ -35,21 +33,25 @@ namespace ShooterCar.Enemy
             {
                 GameObject enemy = GetEnemy();
                 m_EnemyPairs.Add(enemy, i);
-                enemy.transform.position = m_CarStartPos[i].position;
-                enemy.transform.DOMove(m_CarPos[i].position, 1);
+                SetEnemyPos(enemy, m_CarStartPos[i].position, m_CarPos[i].position);
             }
         }
 
-        private void SetEnemyPosition()
+        private void ReproduceEnemy()
         {
-            if (m_EnemyCarCount >= m_MaxEnemyCount - ObjectPooling.Instance.EnemiesAmount) return;
+            if (m_EnemyCarCount >= m_MaxEnemyCount) return;
 
             GameObject enemy = GetEnemy();
             if (m_EnemyPairs.TryGetValue(enemy, out var pair))
             {
-                enemy.transform.position = m_CarStartPos[pair].position;
-                enemy.transform.DOMove(m_CarPos[pair].position, 2);
+                SetEnemyPos(enemy, m_CarStartPos[pair].position, m_CarPos[pair].position);
             }
+        }
+
+        private void SetEnemyPos(GameObject enemy, Vector3 startPos, Vector3 finalPos)
+        {
+            enemy.transform.position = startPos;
+
         }
 
         private GameObject GetEnemy()

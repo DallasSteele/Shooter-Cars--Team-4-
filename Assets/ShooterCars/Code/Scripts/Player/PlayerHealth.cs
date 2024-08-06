@@ -1,5 +1,7 @@
 using UnityEngine;
 
+using ShooterCar.Manager;
+
 namespace ShooterCar.Player
 {
     public class PlayerHealth : MonoBehaviour, IDamageable
@@ -15,7 +17,7 @@ namespace ShooterCar.Player
 
         private void Die()
         {
-            
+            GameController.Instance.OnGameOver?.Invoke();
         }
 
         public void TakeDamage(float damage)

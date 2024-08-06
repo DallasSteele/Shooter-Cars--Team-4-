@@ -20,6 +20,7 @@ namespace ShooterCar.Enemy
         private void Update()
         {
             ShootingLoop();
+            //MuzzleFacingPlayer();
         }
 
         private void ShootingLoop()

@@ -2,6 +2,7 @@ using UnityEngine;
 
 using ShooterCar.Manager;
 using ShooterCar.Utilities;
+using ShooterCar.SO;
 
 namespace BarthaSzabolcs.IsometricAiming
 {
@@ -21,6 +22,8 @@ namespace BarthaSzabolcs.IsometricAiming
 
         private Camera mainCamera;
         private RaycastHit hit;
+        private WeaponRuntime m_Weapon;
+
         private float m_NextShot;
 
         #endregion
@@ -35,6 +38,7 @@ namespace BarthaSzabolcs.IsometricAiming
         {
             // Cache the camera, Camera.main is an expensive operation.
             mainCamera = Camera.main;
+            m_Weapon = new WeaponRuntime(GameController.Instance.WeaponData);
         }
 
         private void Update()
@@ -43,15 +47,7 @@ namespace BarthaSzabolcs.IsometricAiming
 
             Aim();
 
-            // Shoot input
-            if(Time.time >= m_NextShot)
-            {
-                if (Input.GetButton("Fire1"))
-                {
-                    GameController.Instance.OnFire?.Invoke();
-                    m_NextShot = Time.time + 1 / m_FireRate;
-                }
-            }
+            m_Weapon.Shoot();
         }
 
         private void OnEnable()
@@ -87,8 +83,8 @@ namespace BarthaSzabolcs.IsometricAiming
 
             // Instantiate the projectile at the muzzle position and rotation
             //GameObject projectile = Instantiate(projectilePrefab, muzzlePosition, Quaternion.LookRotation(muzzleForward));
-            GameObject projectile = ObjectPooling.Instance.GetBullet();
             //projectile.transform.position = muzzlePosition;
+            GameObject projectile = ObjectPooling.Instance.GetBullet();
             Projectile bullet = projectile.GetComponent<Projectile>();
             bullet.Shoot(muzzleTransform, hit.point, gameObject.tag);
             //bullet.IgnoreObject = transform.parent.gameObject;
