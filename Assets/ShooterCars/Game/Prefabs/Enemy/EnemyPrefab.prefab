@@ -12123,7 +12123,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6718596833257775620}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c690d455dd08164bb18ecb67ba1dc07, type: 3}
   m_Name: 
@@ -12142,7 +12142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159f8f5a8e991864f9069034bba82235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxHealth: 1
+  m_MaxHealth: 100
 --- !u!1 &6721350262745370677
 GameObject:
   m_ObjectHideFlags: 0

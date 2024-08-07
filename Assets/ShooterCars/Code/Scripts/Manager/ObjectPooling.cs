@@ -94,7 +94,7 @@ namespace ShooterCar.Manager
 
             for (int i = 0; i < m_BulletAmount; i++)
             {
-                CreatePool(GameController.Instance.WeaponData.GetProjectile().gameObject, m_BulletList, m_BulletPool);
+                CreatePool(m_BulletPrefab, m_BulletList, m_BulletPool);
             }
         }
 

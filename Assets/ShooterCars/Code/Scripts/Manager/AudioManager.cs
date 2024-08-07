@@ -7,19 +7,21 @@ namespace ShooterCar.Manager
         [SerializeField] private AudioSource m_SFXSource;
         [SerializeField] private AudioClip m_PlayerFireSFX;
 
-        private void OnEnable()
+        public static AudioManager Instance { get; private set; }
+
+        private void Awake()
         {
-            GameController.Instance.OnFire += PlayFireSFX;
+            if(Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
         }
 
-        private void OnDisable()
+        public void PlaySFX(AudioClip clip)
         {
-            GameController.Instance.OnFire -= PlayFireSFX;
-        }
-
-        private void PlayFireSFX()
-        {
-            m_SFXSource.PlayOneShot(m_PlayerFireSFX);
+            m_SFXSource.PlayOneShot(clip);
         }
     }
 }

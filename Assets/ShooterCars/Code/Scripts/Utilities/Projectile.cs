@@ -36,7 +36,7 @@ namespace ShooterCar.Utilities
             ReturnBullet("Kena " + collision.collider.name);
             if(collision.collider.TryGetComponent<IDamageable>(out var damageable))
             {
-                damageable.TakeDamage(1);
+                damageable.TakeDamage(m_DamageAmount);
             }
         }
 

@@ -10,9 +10,9 @@ namespace ShooterCar.Player
 
         private float m_CurrentHealth;
 
-        private void Awake()
+        private void OnEnable()
         {
-            m_CurrentHealth = m_MaxHP; 
+            m_CurrentHealth = m_MaxHP;
         }
 
         private void Die()
