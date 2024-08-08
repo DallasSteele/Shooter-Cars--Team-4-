@@ -246,6 +246,14 @@
       },
       "url": "https://packages.unity.com"
     },
+    "xyz.candycoded.hapticfeedback": {
+      "version": "file:D:/Downloads/HapticFeedback-main/HapticFeedback-main/Assets/Plugins/CandyCoded.HapticFeedback",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.unity.modules.androidjni": "1.0.0"
+      }
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
