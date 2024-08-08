@@ -1,29 +1,13 @@
-using UnityEngine;
-
 using ShooterCar.Manager;
+using ShooterCar.Parent;
 
 namespace ShooterCar.Enemy
 {
-    public class EnemyHealth : MonoBehaviour, IDamageable
+    public class EnemyHealth : HealthSystem
     {
-        [SerializeField] private float m_MaxHealth;
-
-        private float m_CurrentHealth;
-
-        private void Awake()
-        {
-            m_CurrentHealth = m_MaxHealth;
-        }
-
-        private void Die()
+        protected override void Die()
         {
             ObjectPooling.Instance.ReturnEnemy(gameObject);
-        }
-
-        public void TakeDamage(float damage)
-        {
-            m_CurrentHealth -= damage;
-            if (m_CurrentHealth <= 0) Die();
         }
     }
 }

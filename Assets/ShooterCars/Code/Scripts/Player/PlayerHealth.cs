@@ -1,29 +1,13 @@
-using UnityEngine;
-
 using ShooterCar.Manager;
+using ShooterCar.Parent;
 
 namespace ShooterCar.Player
 {
-    public class PlayerHealth : MonoBehaviour, IDamageable
+    public class PlayerHealth : HealthSystem
     {
-        [SerializeField] private float m_MaxHP;
-
-        private float m_CurrentHealth;
-
-        private void OnEnable()
-        {
-            m_CurrentHealth = m_MaxHP;
-        }
-
-        private void Die()
+        protected override void Die()
         {
             GameController.Instance.OnGameOver?.Invoke();
-        }
-
-        public void TakeDamage(float damage)
-        {
-            m_CurrentHealth -= damage;
-            if(m_CurrentHealth <= 0) Die();
         }
     }
 }

@@ -413,6 +413,7 @@ MonoBehaviour:
   m_BulletAmount: 20
   m_BulletPrefab: {fileID: 8633678809468872215, guid: 9d6edb4199386fb4aab5adc958cb6a52, type: 3}
   m_BulletList: {fileID: 2123268459}
+  m_ExplosionEffect: {fileID: 2638383212772504921, guid: 3150fc099f80b2448962cab965450715, type: 3}
 --- !u!1 &63320874
 GameObject:
   m_ObjectHideFlags: 0
@@ -1368,14 +1369,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 301093215}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e01af1ad470493f478b6dfa9dd80a838, type: 3}
+  m_Script: {fileID: 11500000, guid: c7a007379fe71b448bb805981965058b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundMask:
+  m_WeaponData: {fileID: 11400000, guid: d4f84444aebaca24587d681ad11dce32, type: 2}
+  m_WeaponSlot: {fileID: 1197406649}
+  m_AvailableLayer:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_WeaponData: {fileID: 11400000, guid: 10ef39be7179b1f4fa1baf95758d79cc, type: 2}
-  m_WeaponSlot: {fileID: 1197406649}
 --- !u!1 &349092109
 GameObject:
   m_ObjectHideFlags: 0
@@ -2843,6 +2844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 046a9da0a46f9c245b2d761b421fb19c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Camera: {fileID: 963194227}
   m_PlayerObject: {fileID: 301093215}
 --- !u!1 &1046863950
 GameObject:
@@ -4512,7 +4514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab8aa100d632e6c45a8601a81c3f353f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxHP: 10
+  m_MaxHealth: 0
 --- !u!1 &1802730481
 GameObject:
   m_ObjectHideFlags: 0

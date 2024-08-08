@@ -38,7 +38,7 @@ namespace BarthaSzabolcs.IsometricAiming
         {
             // Cache the camera, Camera.main is an expensive operation.
             mainCamera = Camera.main;
-            m_Weapon = new WeaponView(m_WeaponData);
+            //m_Weapon = new WeaponView(m_WeaponData);
         }
 
         private void Update()
@@ -68,7 +68,7 @@ namespace BarthaSzabolcs.IsometricAiming
 
         private void SetGunModel()
         {
-            m_Weapon.Initialize(m_WeaponSlot);
+            //m_Weapon.Initialize(m_WeaponSlot);
         }
 
         private void Aim()
@@ -77,10 +77,10 @@ namespace BarthaSzabolcs.IsometricAiming
             if (success)
             {
                 // Calculate the direction
-                var direction = position - m_WeaponData.Muzzle.position;
+                //var direction = position - m_WeaponData.Muzzle.position;
 
                 // Make the transform look in the direction.
-                m_WeaponData.Muzzle.forward = direction;
+                //m_WeaponData.Muzzle.forward = direction;
             }
         }
 
@@ -104,7 +104,7 @@ namespace BarthaSzabolcs.IsometricAiming
             //bullet.Muzzle = transform;
             //projectile.SetActive(true);
 
-            m_Weapon.Shoot(true, hit.point, gameObject.tag);
+            m_Weapon.Shoot(hit.point, gameObject.tag);
         }
 
         private (bool success, Vector3 position) GetMousePosition()
@@ -113,8 +113,8 @@ namespace BarthaSzabolcs.IsometricAiming
 
             if (Physics.Raycast(ray, out hit, 100, groundMask))
             {
-                if (m_WeaponData.Muzzle != null)
-                Debug.DrawLine(m_WeaponData.Muzzle.position, hit.point, Color.red);
+                //if (m_WeaponData.Muzzle != null)
+                //Debug.DrawLine(m_WeaponData.Muzzle.position, hit.point, Color.red);
                 // The Raycast hit something, return with the position.
                 return (success: true, position: hit.point);
             }

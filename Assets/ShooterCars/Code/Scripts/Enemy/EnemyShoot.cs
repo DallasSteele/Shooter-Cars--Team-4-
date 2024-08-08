@@ -1,15 +1,12 @@
 using UnityEngine;
 
 using ShooterCar.Manager;
-using ShooterCar.Utilities;
+using ShooterCar.Parent;
 
 namespace ShooterCar.Enemy
 {
-    public class EnemyShoot : MonoBehaviour
+    public class EnemyShoot : ShootingSystem
     {
-        [SerializeField] private Transform m_Muzzle;
-        [SerializeField] private float m_FireCooldown;
-
         private float m_FireInterval;
 
         private void Start()
@@ -17,35 +14,15 @@ namespace ShooterCar.Enemy
             m_FireInterval = 2;
         }
 
-        private void Update()
+        protected override void Shoot()
         {
-            ShootingLoop();
-            //MuzzleFacingPlayer();
-        }
-
-        private void ShootingLoop()
-        {
-            if(m_FireInterval <= 0)
-            {
-                Fire();
-                m_FireInterval = m_FireCooldown;
-            }
-            else
+            if (m_FireInterval >= 0)
             {
                 m_FireInterval -= Time.deltaTime;
+                return;
             }
-        }
 
-        private void MuzzleFacingPlayer()
-        {
-            m_Muzzle.transform.LookAt(GameController.Instance.Player.transform.position);
-        }
-
-        private void Fire()
-        {
-            GameObject bullet = ObjectPooling.Instance.GetBullet();
-            Projectile projectile = bullet.GetComponent<Projectile>();
-            projectile.Shoot(m_Muzzle, GameController.Instance.Player.transform.position, gameObject.tag);
+            m_Weapon.Shoot(GameController.Instance.Player.transform.position, gameObject.tag);
         }
     }
 }
