@@ -125,6 +125,15 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.postprocessing": {
+      "version": "3.4.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.physics": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.profiling.core": {
       "version": "1.0.2",
       "depth": 2,
@@ -236,6 +245,14 @@
         "com.unity.modules.xr": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "xyz.candycoded.hapticfeedback": {
+      "version": "file:D:/Downloads/HapticFeedback-main/HapticFeedback-main/Assets/Plugins/CandyCoded.HapticFeedback",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.unity.modules.androidjni": "1.0.0"
+      }
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
