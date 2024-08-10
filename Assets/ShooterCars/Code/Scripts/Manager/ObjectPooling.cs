@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -39,6 +40,11 @@ namespace ShooterCar.Manager
         /// </summary>
         [Tooltip("GameObject as parent to object pool")]
         [SerializeField] private GameObject m_BulletList;
+        /// <summary>
+        /// Explosion effect for Explode bullet type
+        /// </summary>
+        [Tooltip("Explosion effect for Explode bullet type")]
+        [SerializeField] private GameObject m_ExplosionEffect;
 
         /// <summary>
         /// Pool variable for enemy
@@ -48,12 +54,19 @@ namespace ShooterCar.Manager
         /// Pool variable for bullet
         /// </summary>
         private Queue<GameObject> m_BulletPool = new Queue<GameObject>();
+        /// <summary>
+        /// Pool variable for explosion effect
+        /// </summary>
+        private Queue<GameObject> m_ParticlePool = new Queue<GameObject>();
 
         /// <summary>
         /// Single Instance for easy call this class from entire project
         /// </summary>
         public static ObjectPooling Instance { get; private set; }
-        public float EnemiesAmount { get {  return m_EnemiesAmount; } }
+        /// <summary>
+        /// Amount of enemies spawned once, object pooling pattern used
+        /// </summary>
+        public float EnemiesAmount { get { return m_EnemiesAmount; } }
 
         private void Awake()
         {
@@ -92,6 +105,11 @@ namespace ShooterCar.Manager
             for (int i = 0; i < m_BulletAmount; i++)
             {
                 CreatePool(m_BulletPrefab, m_BulletList, m_BulletPool);
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                CreatePool(m_ExplosionEffect, m_BulletList, m_ParticlePool);
             }
         }
 
@@ -154,6 +172,18 @@ namespace ShooterCar.Manager
             return GetObject(m_BulletPool, m_BulletPrefab, m_BulletList);
         }
 
+        public GameObject GetExplodeEffect()
+        {
+            GameObject effect = GetObject(m_ParticlePool, m_ExplosionEffect, m_BulletList);
+            StartCoroutine(ReturnExplodeEffect(effect));
+            return effect;
+        }
+
+        private void ReturnExplode(GameObject effect)
+        {
+            ReturnObject(effect, m_ParticlePool);
+        }
+
         public void ReturnBullet(GameObject bullet)
         {
             ReturnObject(bullet, m_BulletPool);
@@ -162,6 +192,13 @@ namespace ShooterCar.Manager
         public void ReturnEnemy(GameObject enemy)
         {
             ReturnObject(enemy, m_EnemiesPool);
+            GameController.Instance.OnEnemyDestroy?.Invoke();
+        }
+
+        private IEnumerator ReturnExplodeEffect(GameObject effect)
+        {
+            yield return new WaitForSeconds(.6f);
+            ReturnExplode(effect);
         }
     }
 }

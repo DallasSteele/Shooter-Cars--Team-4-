@@ -2,6 +2,7 @@ using UnityEngine;
 
 using ShooterCar.Manager;
 using ShooterCar.Utilities;
+using ShooterCar.SO;
 
 namespace BarthaSzabolcs.IsometricAiming
 {
@@ -12,18 +13,18 @@ namespace BarthaSzabolcs.IsometricAiming
         #region Editor Settings
 
         [SerializeField] private LayerMask groundMask;
-        [SerializeField] private GameObject projectilePrefab;
-        [SerializeField] private Transform muzzleTransform;
-        [SerializeField] private float projectileForce = 20f; // Adjust the force as needed
+        [SerializeField] private Weapon m_WeaponData;
+        [SerializeField] private Transform m_WeaponSlot;
 
         #endregion
 
         #region Private Fields
 
-        [SerializeField] private Vector3 m_Offset;
-
         private Camera mainCamera;
         private RaycastHit hit;
+        private WeaponView m_Weapon;
+
+        private float m_NextShot;
 
         #endregion
 
@@ -37,20 +38,38 @@ namespace BarthaSzabolcs.IsometricAiming
         {
             // Cache the camera, Camera.main is an expensive operation.
             mainCamera = Camera.main;
+            //m_Weapon = new WeaponView(m_WeaponData);
         }
 
         private void Update()
         {
-            Aim();
+            //if (GameController.Instance.GameStarting == false) return;
+            if (GameController.Instance.HoverButton) return;
 
-            // Shoot input
-            if (Input.GetButtonDown("Fire1"))
+
+            if(Input.GetButton("Fire1"))
             {
+                Aim();
                 Shoot();
             }
         }
 
+        private void OnEnable()
+        {
+            GameController.Instance.OnGameStart += SetGunModel;
+        }
+
+        private void OnDisable()
+        {
+            GameController.Instance.OnGameStart -= SetGunModel;
+        }
+
         #endregion
+
+        private void SetGunModel()
+        {
+            //m_Weapon.Initialize(m_WeaponSlot);
+        }
 
         private void Aim()
         {
@@ -58,59 +77,56 @@ namespace BarthaSzabolcs.IsometricAiming
             if (success)
             {
                 // Calculate the direction
-                var direction = position - transform.position;
+                //var direction = position - m_WeaponData.Muzzle.position;
 
                 // Make the transform look in the direction.
-                transform.forward = direction;
+                //m_WeaponData.Muzzle.forward = direction;
             }
         }
 
         private void Shoot()
         {
             // Get the muzzle position and forward direction
-            Vector3 muzzlePosition = muzzleTransform.position;
-            Vector3 muzzleForward = muzzleTransform.forward;
+            //Vector3 muzzlePosition = muzzleTransform.position;
+            //Vector3 muzzleForward = muzzleTransform.forward;
 
             // Instantiate the projectile at the muzzle position and rotation
             //GameObject projectile = Instantiate(projectilePrefab, muzzlePosition, Quaternion.LookRotation(muzzleForward));
-            GameObject projectile = ObjectPooling.Instance.GetBullet();
-            projectile.transform.position = transform.position;
-            Projectile bullet = projectile.GetComponent<Projectile>();
+            //projectile.transform.position = muzzlePosition;
+
+            //GameObject projectile = ObjectPooling.Instance.GetBullet();
+            //Projectile bullet = projectile.GetComponent<Projectile>();
+            //bullet.Shoot(muzzleTransform, hit.point, gameObject.tag);
+
             //bullet.IgnoreObject = transform.parent.gameObject;
             //bullet.Offset = m_Offset;
             //bullet.Direction = Vector3.zero + m_Offset - transform.position;
-            bullet.Muzzle = transform;
-            projectile.transform.rotation = Quaternion.LookRotation(muzzleForward);
+            //bullet.Muzzle = transform;
+            //projectile.SetActive(true);
 
-            // Get the Rigidbody component of the projectile
-            //Rigidbody projectileRigidbody = projectile.GetComponent<Rigidbody>();
-
-            // Set the projectile's velocity to a fixed value
-            //projectileRigidbody.velocity = muzzleForward * projectileForce;
+            m_Weapon.Shoot(hit.point, gameObject.tag);
         }
 
         private (bool success, Vector3 position) GetMousePosition()
         {
             var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundMask))
+            if (Physics.Raycast(ray, out hit, 100, groundMask))
             {
-                Debug.DrawLine(transform.position, hit.point, Color.red);
+                //if (m_WeaponData.Muzzle != null)
+                //Debug.DrawLine(m_WeaponData.Muzzle.position, hit.point, Color.red);
                 // The Raycast hit something, return with the position.
                 return (success: true, position: hit.point);
             }
             else
             {
                 // The Raycast did not hit anything.
-                return (success: false, position: Vector3.zero);
+                //return (success: false, position: Vector3.zero);
+                Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
+                // The Raycast did not hit anything.
+                return (success: false, position: ray.origin + ray.direction * 100);
             }
         }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-        }
-
         #endregion
     }
 }
