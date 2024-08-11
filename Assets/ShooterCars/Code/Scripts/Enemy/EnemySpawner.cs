@@ -39,7 +39,11 @@ namespace ShooterCar.Enemy
 
         private void ReproduceEnemy()
         {
-            if (m_EnemyCarCount >= m_MaxEnemyCount) return;
+            if (m_EnemyCarCount >= m_MaxEnemyCount)
+            {
+                Debug.LogWarning("Lawan Boss");
+                return;
+            }
 
             GameObject enemy = GetEnemy();
             if (m_EnemyPairs.TryGetValue(enemy, out var pair))

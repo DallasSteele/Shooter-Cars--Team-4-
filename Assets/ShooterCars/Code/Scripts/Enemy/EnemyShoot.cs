@@ -7,9 +7,11 @@ namespace ShooterCar.Enemy
 {
     public class EnemyShoot : ShootingSystem
     {
+        private Transform m_Player { get { return GameController.Instance.Player.transform; } }
+
         private float m_FireInterval;
 
-        private void Start()
+        private void OnEnable()
         {
             m_FireInterval = 2;
         }
@@ -22,7 +24,7 @@ namespace ShooterCar.Enemy
                 return;
             }
 
-            m_Weapon.Shoot(GameController.Instance.Player.transform.position, gameObject.tag);
+            m_Weapon.Shoot(m_Player.position, gameObject.tag);
         }
     }
 }

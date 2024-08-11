@@ -58,7 +58,7 @@ namespace ShooterCar.SO
                 bullet.Initialize(m_Weapon.BulletType, m_Weapon.DamageAmount, m_Weapon.BulletSpeed);
                 bullet.Shoot(m_Muzzle, target, ignoreObject);
 
-                AudioManager.Instance.PlaySFX(m_Weapon.Sound);
+                //AudioManager.Instance.PlaySFX(m_Weapon.Sound);
 
                 m_NextShot = Time.time + 1 / m_Weapon.FireRate;
             }
