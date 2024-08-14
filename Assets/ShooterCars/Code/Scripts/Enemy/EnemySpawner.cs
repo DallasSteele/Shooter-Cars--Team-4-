@@ -12,6 +12,7 @@ namespace ShooterCar.Enemy
         [SerializeField] private int m_MaxEnemyCount;
 
         private int m_EnemyCarCount;
+        private int x;
 
         private Dictionary<GameObject, int> m_EnemyPairs = new Dictionary<GameObject, int>();
 
@@ -39,9 +40,16 @@ namespace ShooterCar.Enemy
 
         private void ReproduceEnemy()
         {
+
             if (m_EnemyCarCount >= m_MaxEnemyCount)
             {
-                Debug.LogWarning("Lawan Boss");
+                x++;
+                if(x >= ObjectPooling.Instance.EnemiesAmount)
+                {
+                    Debug.LogWarning("Lawan Boss");
+                    GameController.Instance.OnBossSpawn();
+                }
+
                 return;
             }
 

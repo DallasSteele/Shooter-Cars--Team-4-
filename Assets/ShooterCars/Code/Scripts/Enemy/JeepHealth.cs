@@ -3,7 +3,7 @@ using ShooterCar.Parent;
 
 namespace ShooterCar.Enemy
 {
-    public class EnemyHealth : HealthSystem
+    public class JeepHealth : HealthSystem
     {
         protected override void Die()
         {

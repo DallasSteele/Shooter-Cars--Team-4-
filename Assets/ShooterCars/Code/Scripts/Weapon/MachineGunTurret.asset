@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c99c4eef651e8b4cb5c428eb6e3ba46, type: 3}
   m_Name: MachineGunTurret
   m_EditorClassIdentifier: 
-  m_BulletType: 0
   m_DamageAmount: 5
   m_BulletSpeed: 50
-  m_FireRate: 4
+  m_FireRate: 3
+  m_BulletType: 0
   m_Model: {fileID: -6385670154585085709, guid: 018566b757c1ed744bd8c1ef78dfa5c1, type: 3}
   m_SFX: {fileID: 8300000, guid: 1769422d53d2efd49aa0eef983ff64c5, type: 3}

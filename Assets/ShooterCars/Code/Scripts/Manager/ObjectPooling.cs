@@ -208,7 +208,7 @@ namespace ShooterCar.Manager
         public void ReturnEnemy(GameObject enemy)
         {
             ReturnObject(enemy, m_EnemiesPool);
-            GameController.Instance.OnEnemyDestroy?.Invoke();
+            GameController.Instance.OnEnemyDestroy();
         }
 
         /// <summary>

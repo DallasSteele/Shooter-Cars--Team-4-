@@ -7,7 +7,7 @@ namespace ShooterCar.Player
     {
         protected override void Die()
         {
-            GameController.Instance.OnGameOver?.Invoke();
+            GameController.Instance.OnGameOver();
         }
     }
 }

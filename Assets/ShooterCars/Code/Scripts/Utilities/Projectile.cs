@@ -34,9 +34,9 @@ namespace ShooterCar.Utilities
             //transform.position = Vector3.MoveTowards(Muzzle.position, Hit.point, 50 * Time.deltaTime);
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter(Collider collision)
         {
-            if (collision.collider.CompareTag(m_IgnoreObject)) return;
+            if (collision.CompareTag(m_IgnoreObject)) return;
 
             switch (m_BulletType)
             {
@@ -50,7 +50,7 @@ namespace ShooterCar.Utilities
                     break;
             }
 
-            ReturnBullet("Kena " + collision.collider.name);
+            ReturnBullet("Kena " + collision.name);
         }
 
         private void OnDrawGizmosSelected()
@@ -73,9 +73,9 @@ namespace ShooterCar.Utilities
             m_IgnoreObject = ignoreObject;
         }
 
-        private void StandardType(Collision collision)
+        private void StandardType(Collider collision)
         {
-            if (collision.collider.TryGetComponent<HealthSystem>(out var damageable))
+            if (collision.TryGetComponent<HealthSystem>(out var damageable))
             {
                 damageable.TakeDamage(m_DamageAmount);
             }

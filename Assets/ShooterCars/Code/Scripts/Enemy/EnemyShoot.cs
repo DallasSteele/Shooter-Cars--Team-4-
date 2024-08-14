@@ -7,13 +7,15 @@ namespace ShooterCar.Enemy
 {
     public class EnemyShoot : ShootingSystem
     {
-        private Transform m_Player { get { return GameController.Instance.Player.transform; } }
-
+        [SerializeField] private float m_Cooldown = 2;
+        
         private float m_FireInterval;
+        
+        private Transform m_Player { get { return GameController.Instance.Player.transform; } }
 
         private void OnEnable()
         {
-            m_FireInterval = 2;
+            m_FireInterval = m_Cooldown;
         }
 
         protected override void Shoot()
