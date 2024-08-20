@@ -6991,6 +6991,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_WeaponData: {fileID: 11400000, guid: 10ef39be7179b1f4fa1baf95758d79cc, type: 2}
   m_WeaponSlot: {fileID: 370632369389873022}
+  m_Cooldown: 2
 --- !u!114 &2469599420836981889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7003,7 +7004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c690d455dd08164bb18ecb67ba1dc07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Limit: 4
+  m_Limit: 2.5
   m_MoveSpeed: 1
 --- !u!114 &-4302229997487903080
 MonoBehaviour:

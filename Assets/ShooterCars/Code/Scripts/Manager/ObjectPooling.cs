@@ -46,6 +46,10 @@ namespace ShooterCar.Manager
         [Tooltip("Explosion effect for Explode bullet type")]
         [SerializeField] private GameObject m_ExplosionEffect;
 
+        [Header("Looping Road Properties")]
+        [SerializeField] private GameObject[] m_Roads;
+        [SerializeField] private GameObject m_RoadList;
+
         /// <summary>
         /// Pool variable for enemy
         /// </summary>
@@ -58,6 +62,7 @@ namespace ShooterCar.Manager
         /// Pool variable for explosion effect
         /// </summary>
         private Queue<GameObject> m_ParticlePool = new Queue<GameObject>();
+        private Queue<GameObject> m_RoadPool = new Queue<GameObject>();
 
         /// <summary>
         /// Single Instance for easy call this class from entire project
@@ -77,6 +82,11 @@ namespace ShooterCar.Manager
             }
 
             Instance = this;
+
+            foreach (var item in m_Roads)
+            {
+                CreatePool(item, m_RoadList, m_RoadPool);
+            }
         }
 
         private void OnEnable()
@@ -183,6 +193,11 @@ namespace ShooterCar.Manager
             return effect;
         }
 
+        public GameObject GetRoad()
+        {
+            return GetObject(m_RoadPool, m_Roads[0], m_RoadList);
+        }
+
         /// <summary>
         /// Return the explode particle to the pool
         /// </summary>
@@ -209,6 +224,12 @@ namespace ShooterCar.Manager
         {
             ReturnObject(enemy, m_EnemiesPool);
             GameController.Instance.OnEnemyDestroy();
+        }
+
+        public void ReturnRoad(GameObject road)
+        {
+            ReturnObject(road, m_RoadPool);
+            GameController.Instance.OnRoadLoop();
         }
 
         /// <summary>

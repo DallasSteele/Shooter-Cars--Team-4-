@@ -9,6 +9,8 @@ namespace ShooterCar.Enemy
     {
         [SerializeField] private GameObject m_Boss;
 
+        [SerializeField] private PlayableAsset bossSpawn, bossDefeat;
+
         [SerializeField] private PlayableDirector m_Director;
 
         [SerializeField] private Transform m_BossSpawnPos;
@@ -18,11 +20,13 @@ namespace ShooterCar.Enemy
         private void OnEnable()
         {
             GameController.Instance.OnBossSpawn += SpawnBoss;
+            GameController.Instance.OnBossDefeated += Defeated;
         }
 
         private void OnDisable()
         {
             GameController.Instance.OnBossSpawn -= SpawnBoss;
+            GameController.Instance.OnBossDefeated -= Defeated;
         }
 
         private void SpawnBoss()
@@ -30,10 +34,18 @@ namespace ShooterCar.Enemy
             if (Boss == null)
             {
                 Boss = Instantiate(m_Boss, m_BossSpawnPos);
-                m_Director.gameObject.SetActive(true);
+
+                m_Director.Play(bossSpawn);
                 return;
             }
             return;
+        }
+
+        private void Defeated()
+        {
+            Destroy(Boss);
+
+            m_Director.Play(bossDefeat);
         }
     }
 }
