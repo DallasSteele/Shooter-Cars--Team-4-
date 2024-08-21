@@ -11,7 +11,18 @@ public class InputHandler : MonoBehaviour
     [SerializeField] private TextMeshProUGUI editProfile;
     [SerializeField] private TextMeshProUGUI Name;
 
-    //Test out
+    public void Start()
+    {
+        //load saved name
+        string savedName = PlayerPrefs.GetString("name", "");
+        if (!string.IsNullOrEmpty(savedName))
+        {
+            Name.text = savedName;
+            inputField.text = savedName;
+        }
+    }
+
+
     public void Validation()
     {
 
