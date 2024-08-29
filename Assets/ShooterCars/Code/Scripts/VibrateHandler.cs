@@ -1,61 +1,64 @@
-using UnityEngine.UI;
 using UnityEngine;
-using CandyCoded.HapticFeedback;
 
-public class VibrateHandler : MonoBehaviour
+public static class VibrateHandler
 {
-    [SerializeField]
-    private Button ButtonVibrateHandler;
-    [SerializeField]
-    private Button lightVibration;
-    [SerializeField]
-    private Button mediumVibration;
-    [SerializeField]
-    private Button heavyVibration;
+    private static AndroidJavaClass unityPlayer;
+    private static AndroidJavaObject currentActivity;
+    private static AndroidJavaObject vibrator;
 
-
-    // Start is called before the first frame update
-    private void OnEnable()
+    static VibrateHandler()
     {
-        ButtonVibrateHandler.onClick.AddListener(DefaultVibration);
+        if (IsAndroid())
+        {
+            try
+            {
+                unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+                currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+                vibrator = currentActivity.Call<AndroidJavaObject>("getSystemService", "vibrator");
 
-        lightVibration.onClick.AddListener(LightVibration);
-        mediumVibration.onClick.AddListener(MediumVibration);
-        heavyVibration.onClick.AddListener(HeavyVibration);
+                if (vibrator == null)
+                {
+                    Debug.LogError("Vibrator service not found on device.");
+                }
+                else
+                {
+                    Debug.Log("Vibrator service initialized successfully.");
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError("Failed to initialize vibrator: " + ex.Message);
+            }
+        }
     }
 
-    // Update is called once per frame
-    private void OnDisable()
+    public static void Vibration(long milliseconds = 220)
     {
-        ButtonVibrateHandler.onClick.AddListener(DefaultVibration);
-        
-        lightVibration.onClick.RemoveListener(LightVibration);
-        mediumVibration.onClick.RemoveListener(MediumVibration);
-        heavyVibration.onClick.RemoveListener(HeavyVibration);
+        if (IsAndroid() && vibrator != null)
+        {
+            vibrator.Call("vibrate", milliseconds);
+        }
+        else
+        {
+            Debug.LogWarning("Using Handheld.Vibrate as fallback.");
+            Handheld.Vibrate();
+        }
     }
 
-    private void DefaultVibration()
+    public static void Cancel()
     {
-        Debug.Log("Default Vibration");
-        Handheld.Vibrate();
+        if (IsAndroid() && vibrator != null)
+        {
+            vibrator.Call("cancel");
+        }
     }
 
-    private void LightVibration()
+    private static bool IsAndroid()
     {
-        Debug.Log("Light Vibration");
-        HapticFeedback.LightFeedback();
+#if UNITY_ANDROID
+        return true;
+#else
+        return false;
+#endif
     }
-
-    private void MediumVibration()
-    {
-        Debug.Log("Medium Vibration");
-        HapticFeedback.MediumFeedback();
-    }
-
-    private void HeavyVibration()
-    {
-        Debug.Log("Heavy Vibration");
-        HapticFeedback.HeavyFeedback();
-    }
-
 }

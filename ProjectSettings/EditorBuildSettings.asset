@@ -4,7 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/ShooterCars/Editor/Scenes/SampleScene 1.unity
+    guid: 52f8aa13907886b4389c8787601a4005
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 8128962ecbdfaf04b8362cd0529fb793, type: 2}
     com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: 789777206aa86e848b8c73671880b381, type: 2}
