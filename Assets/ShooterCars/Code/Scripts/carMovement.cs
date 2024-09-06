@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using ShooterCar.Manager;
 
 public class carMovement : MonoBehaviour
 {
@@ -18,16 +19,16 @@ public class carMovement : MonoBehaviour
     private float currentXPosition;
     private float lastInputTime = -1f;
     private gameManager gameManager;
+    private Transform m_Player { get { return GameController.Instance.Player.transform; } }
 
-    [SerializeField] Transform m_Player;
 
     void Start()
     {
         currentXPosition = 0f;
 
         // Add listeners to the buttons
-        leftButton.onClick.AddListener(SideStepLeft);
-        rightButton.onClick.AddListener(SideStepRight);
+        leftButton.onClick.AddListener(SideStepRight);
+        rightButton.onClick.AddListener(SideStepLeft);
         //Call the game manager
         gameManager = FindObjectOfType<gameManager>();
     }
