@@ -13,18 +13,6 @@ namespace ShooterCar.Parent
 
         protected WeaponView m_Weapon { get; private set; }
 
-        public Weapon WeaponData
-        {
-            get { return m_WeaponData; }
-            private set
-            {
-                if(m_WeaponData == value) return;
-
-                m_WeaponData = value;
-                InitializeWeaponView();
-            }
-        }
-
         private void Awake()
         {
             InitializeWeaponView();
@@ -39,13 +27,8 @@ namespace ShooterCar.Parent
 
         private void InitializeWeaponView()
         {
-            if(m_WeaponSlot.childCount > 0)
-            {
-                Destroy(m_WeaponSlot.GetChild(0).gameObject);
-            }
-
-            WeaponStore weaponModel = WeaponData.InitializePrefab(m_WeaponSlot);
-            m_Weapon = new WeaponView(WeaponData, weaponModel.Muzzle);
+            WeaponStore weaponModel = m_WeaponData.InitializePrefab(m_WeaponSlot);
+            m_Weapon = new WeaponView(m_WeaponData, weaponModel.Muzzle);
         }
     }
 }

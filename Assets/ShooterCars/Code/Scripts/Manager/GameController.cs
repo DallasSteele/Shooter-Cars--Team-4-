@@ -1,5 +1,7 @@
 using UnityEngine;
 
+using ShooterCar.SO;
+
 namespace ShooterCar.Manager
 {
     public class GameController : MonoBehaviour
@@ -8,12 +10,9 @@ namespace ShooterCar.Manager
         [SerializeField] private GameObject m_PlayerObject;
 
         public delegate void GameAction();
-        public GameAction OnGameStart { get; set; } = delegate { };
-        public GameAction OnGameOver { get; set; } = delegate { };
-        public GameAction OnBossSpawn { get; set; } = delegate { };
-        public GameAction OnBossDefeated { get; set; } = delegate { };
-        public GameAction OnEnemyDestroy { get; set; } = delegate { };
-        public GameAction OnRoadLoop { get; set; } = delegate { };
+        public GameAction OnGameStart { get; set; }
+        public GameAction OnGameOver { get; set; }
+        public GameAction OnEnemyDestroy { get; set; }
 
         public static GameController Instance { get; private set; }
         public Camera MainCamera { get { return m_Camera; } }

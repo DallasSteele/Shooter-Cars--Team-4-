@@ -46,10 +46,6 @@ namespace ShooterCar.Manager
         [Tooltip("Explosion effect for Explode bullet type")]
         [SerializeField] private GameObject m_ExplosionEffect;
 
-        [Header("Looping Road Properties")]
-        [SerializeField] private GameObject[] m_Roads;
-        [SerializeField] private GameObject m_RoadList;
-
         /// <summary>
         /// Pool variable for enemy
         /// </summary>
@@ -62,7 +58,6 @@ namespace ShooterCar.Manager
         /// Pool variable for explosion effect
         /// </summary>
         private Queue<GameObject> m_ParticlePool = new Queue<GameObject>();
-        private Queue<GameObject> m_RoadPool = new Queue<GameObject>();
 
         /// <summary>
         /// Single Instance for easy call this class from entire project
@@ -82,11 +77,6 @@ namespace ShooterCar.Manager
             }
 
             Instance = this;
-
-            foreach (var item in m_Roads)
-            {
-                CreatePool(item, m_RoadList, m_RoadPool);
-            }
         }
 
         private void OnEnable()
@@ -107,7 +97,7 @@ namespace ShooterCar.Manager
         /// </summary>
         private void InitializedPool()
         {
-            for (int i = 0; i < EnemiesAmount; i++)
+            for (int i = 0; i < m_EnemiesAmount; i++)
             {
                 CreatePool(m_EnemyPrefab, m_EnemyList, m_EnemiesPool);
             }
@@ -182,10 +172,6 @@ namespace ShooterCar.Manager
             return GetObject(m_BulletPool, m_BulletPrefab, m_BulletList);
         }
 
-        /// <summary>
-        /// Get the explode effect out from the particle's pool
-        /// </summary>
-        /// <returns>Explode particle taken from the pool</returns>
         public GameObject GetExplodeEffect()
         {
             GameObject effect = GetObject(m_ParticlePool, m_ExplosionEffect, m_BulletList);
@@ -193,51 +179,22 @@ namespace ShooterCar.Manager
             return effect;
         }
 
-        public GameObject GetRoad()
-        {
-            return GetObject(m_RoadPool, m_Roads[0], m_RoadList);
-        }
-
-        /// <summary>
-        /// Return the explode particle to the pool
-        /// </summary>
-        /// <param name="effect">Particle gameObject to return</param>
         private void ReturnExplode(GameObject effect)
         {
             ReturnObject(effect, m_ParticlePool);
         }
 
-        /// <summary>
-        /// Return the bullet object to the pool
-        /// </summary>
-        /// <param name="bullet">Bullet gameObject to return</param>
         public void ReturnBullet(GameObject bullet)
         {
             ReturnObject(bullet, m_BulletPool);
         }
 
-        /// <summary>
-        /// Return the enemy object to the pool
-        /// </summary>
-        /// <param name="enemy">Enemy gameObject to return</param>
         public void ReturnEnemy(GameObject enemy)
         {
             ReturnObject(enemy, m_EnemiesPool);
-            GameController.Instance.OnEnemyDestroy();
+            GameController.Instance.OnEnemyDestroy?.Invoke();
         }
 
-        public void ReturnRoad(GameObject road)
-        {
-            ReturnObject(road, m_RoadPool);
-            GameController.Instance.OnRoadLoop();
-        }
-
-        /// <summary>
-        /// Coroutine for particle effect
-        /// Start with default timer 0.6 seconds
-        /// </summary>
-        /// <param name="effect">Explode particle gameObject to return</param>
-        /// <returns>Default timer</returns>
         private IEnumerator ReturnExplodeEffect(GameObject effect)
         {
             yield return new WaitForSeconds(.6f);

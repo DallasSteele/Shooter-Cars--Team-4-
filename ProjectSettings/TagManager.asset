@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Car
   - Enemy
-  - Road
   layers:
   - Default
   - TransparentFX
