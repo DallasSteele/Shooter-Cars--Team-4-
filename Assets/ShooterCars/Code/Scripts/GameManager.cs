@@ -10,6 +10,7 @@ public class gameManager : MonoBehaviour
     public GameObject inGameUIPanel;
     public bool isGameActive = false;
     public Button playButton; //this for the start button
+    public Button quitButton; //this for the quit button
     public carMovement carMovement;
 
 
@@ -19,6 +20,7 @@ public class gameManager : MonoBehaviour
         //Disable the game
         DisableGameplay();
         playButton.onClick.AddListener(PlayGame); //listener to play
+        quitButton.onClick.AddListener(QuitGame); //listener to quit
     }
 
     public void PlayGame()
@@ -47,6 +49,16 @@ public class gameManager : MonoBehaviour
         //Enable the player controls and everything users use for the game
         startMenuPanel.SetActive(false);
         inGameUIPanel.SetActive(true);
+    }
+
+    public void QuitGame()
+    {
+        //Disable gameplay
+        DisableGameplay();
+
+        //Reset game variables and states
+        //If any
+        SceneManager.LoadScene("SampleScene 1");
     }
 
 }

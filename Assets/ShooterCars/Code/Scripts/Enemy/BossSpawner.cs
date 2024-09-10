@@ -14,6 +14,7 @@ namespace ShooterCar.Enemy
         [SerializeField] private PlayableDirector m_Director;
 
         [SerializeField] private Transform m_BossSpawnPos;
+        
 
         private GameObject Boss { get; set; }
 
