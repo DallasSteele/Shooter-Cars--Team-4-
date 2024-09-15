@@ -110,7 +110,7 @@ namespace ShooterCar.Enemy
             if (levelManager.CanSpawnEnemies())
             {
                 isSpawningEnabled = true;
-                SetInitialEnemy();
+                ResetEnemy();
             }
         }
     }
