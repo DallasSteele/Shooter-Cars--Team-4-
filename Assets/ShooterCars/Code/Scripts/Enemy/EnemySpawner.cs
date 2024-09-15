@@ -10,11 +10,15 @@ namespace ShooterCar.Enemy
     {
         [SerializeField] private Transform[] m_CarPos, m_CarStartPos;
         [SerializeField] private int m_MaxEnemyCount;
+        [SerializeField] private LevelManager levelManager;
+        [SerializeField] private GameObject enemySpawner;
 
         private int m_EnemyCarCount;
         private int x;
 
         private Dictionary<GameObject, int> m_EnemyPairs { get; set; } = new Dictionary<GameObject, int>();
+
+        private bool isSpawningEnabled = true;
 
         private void OnEnable()
         {
@@ -32,43 +36,49 @@ namespace ShooterCar.Enemy
 
         private void SetInitialEnemy()
         {
-            for (int i = 0; i < ObjectPooling.Instance.EnemiesAmount; i++)
+            if (levelManager.CanSpawnEnemies()) //check if enemies can spawn
             {
-                GameObject enemy = GetEnemy();
-                m_EnemyPairs.Add(enemy, i);
-                SetEnemyPos(enemy, m_CarStartPos[i].position);
+                for (int i = 0; i < ObjectPooling.Instance.EnemiesAmount; i++)
+                {
+                    GameObject enemy = GetEnemy();
+                    m_EnemyPairs.Add(enemy, i);
+                    SetEnemyPos(enemy, m_CarStartPos[i].position);
+                }       
             }
         }
 
         private void ReproduceEnemy()
         {
-            if (m_EnemyCarCount >= m_MaxEnemyCount)
+            if (levelManager.CanSpawnEnemies()) //check if enemies can spawn
             {
-                x++;
-                if(x >= ObjectPooling.Instance.EnemiesAmount)
+                if (m_EnemyCarCount >= m_MaxEnemyCount)
                 {
-                    Debug.LogWarning("Lawan Boss");
-                    GameController.Instance.OnBossSpawn();
+                    x++;
+                    if(x >= ObjectPooling.Instance.EnemiesAmount)
+                    {
+                        Debug.LogWarning("Lawan Boss");
+                        GameController.Instance.OnBossSpawn();
+                    }
+
+                    return;
                 }
-
-                return;
-            }
-
             SpawnEnemy();
+            }
         }
-
         private void ResetEnemy()
         {
-            m_EnemyCarCount = 0;
-            x = 0;
-
-            for (int i = 0; i < ObjectPooling.Instance.EnemiesAmount; i++)
+            if (levelManager.CanSpawnEnemies()) //check if enemies can spawn
             {
-                GameObject enemy = GetEnemy();
-                SetEnemyPos(enemy, m_CarStartPos[i].position);
+                    m_EnemyCarCount = 0;
+                x = 0;
+
+                for (int i = 0; i < ObjectPooling.Instance.EnemiesAmount; i++)
+                {
+                    GameObject enemy = GetEnemy();
+                    SetEnemyPos(enemy, m_CarStartPos[i].position);
+                }
             }
         }
-
         private void SpawnEnemy()
         {
             GameObject enemy = GetEnemy();
@@ -88,6 +98,20 @@ namespace ShooterCar.Enemy
         {
             m_EnemyCarCount++;
             return ObjectPooling.Instance.GetEnemy();
+        }
+
+        public void StopSpawningEnemies()
+        {
+            isSpawningEnabled = false;
+        }
+
+        public void ResumeSpawningEnemies()
+        {
+            if (levelManager.CanSpawnEnemies())
+            {
+                isSpawningEnabled = true;
+                SetInitialEnemy();
+            }
         }
     }
 }

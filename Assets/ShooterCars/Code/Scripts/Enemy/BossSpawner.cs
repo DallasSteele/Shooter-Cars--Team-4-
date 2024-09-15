@@ -14,6 +14,8 @@ namespace ShooterCar.Enemy
         [SerializeField] private PlayableDirector m_Director;
 
         [SerializeField] private Transform m_BossSpawnPos;
+
+        [SerializeField] private LevelManager levelManager;
         
 
         private GameObject Boss { get; set; }
@@ -28,6 +30,14 @@ namespace ShooterCar.Enemy
         {
             GameController.Instance.OnBossSpawn -= SpawnBoss;
             GameController.Instance.OnBossDefeated -= Defeated;
+        }
+
+        private void TrySpawnBoss()
+        {
+            if (levelManager.CanSpawnEnemies()) // check if boss is allowed to spawn
+            {
+                SpawnBoss();
+            }
         }
 
         private void SpawnBoss()
@@ -47,6 +57,9 @@ namespace ShooterCar.Enemy
             Destroy(Boss);
 
             m_Director.Play(bossDefeat);
+            //notify level manager that the boss is defeated
+            levelManager.OnBossDefeated();
         }
+
     }
 }
