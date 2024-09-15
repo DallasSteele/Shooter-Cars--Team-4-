@@ -10,6 +10,7 @@ namespace ShooterCar.Manager
         public delegate void GameAction();
         public GameAction OnGameStart { get; set; } = delegate { };
         public GameAction OnGameOver { get; set; } = delegate { };
+        public GameAction OnGameRestart { get; set; } = delegate { };
         public GameAction OnBossSpawn { get; set; } = delegate { };
         public GameAction OnBossDefeated { get; set; } = delegate { };
         public GameAction OnEnemyDestroy { get; set; } = delegate { };

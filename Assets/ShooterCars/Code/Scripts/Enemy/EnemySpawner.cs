@@ -18,13 +18,14 @@ namespace ShooterCar.Enemy
 
         private Dictionary<GameObject, int> m_EnemyPairs { get; set; } = new Dictionary<GameObject, int>();
 
-        private bool isSpawningEnabled = true;
+        private bool isSpawningEnabled { get; set; } = true;
 
         private void OnEnable()
         {
             GameController.Instance.OnGameStart += SetInitialEnemy;
             GameController.Instance.OnEnemyDestroy += ReproduceEnemy;
             GameController.Instance.OnBossDefeated += ResetEnemy;
+            GameController.Instance.OnGameRestart += ResetEnemy;
         }
 
         private void OnDisable()
@@ -32,6 +33,7 @@ namespace ShooterCar.Enemy
             GameController.Instance.OnGameStart -= SetInitialEnemy;
             GameController.Instance.OnEnemyDestroy -= ReproduceEnemy;
             GameController.Instance.OnBossDefeated -= ResetEnemy;
+            GameController.Instance.OnGameRestart -= ResetEnemy;
         }
 
         private void SetInitialEnemy()
@@ -62,14 +64,16 @@ namespace ShooterCar.Enemy
 
                     return;
                 }
-            SpawnEnemy();
+
+                SpawnEnemy();
             }
         }
+
         private void ResetEnemy()
         {
             if (levelManager.CanSpawnEnemies()) //check if enemies can spawn
             {
-                    m_EnemyCarCount = 0;
+                m_EnemyCarCount = 0;
                 x = 0;
 
                 for (int i = 0; i < ObjectPooling.Instance.EnemiesAmount; i++)

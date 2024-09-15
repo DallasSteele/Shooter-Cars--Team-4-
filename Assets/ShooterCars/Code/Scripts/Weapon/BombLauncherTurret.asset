@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c99c4eef651e8b4cb5c428eb6e3ba46, type: 3}
   m_Name: BombLauncherTurret
   m_EditorClassIdentifier: 
-  m_BulletType: 1
-  m_DamageAmount: 100
+  m_DamageAmount: 25
+  m_DamageSpread: 15
   m_BulletSpeed: 10
-  m_FireRate: 0.2
+  m_FireRate: 0.5
+  m_BulletType: 1
   m_Model: {fileID: -6385670154585085709, guid: 55d2b917d6bbe244086ff7c2ebb7138e, type: 3}
   m_SFX: {fileID: 0}

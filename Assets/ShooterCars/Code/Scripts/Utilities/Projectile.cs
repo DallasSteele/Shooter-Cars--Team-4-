@@ -1,7 +1,7 @@
 using UnityEngine;
 
 using ShooterCar.Manager;
-using ShooterCar.Parent;
+using ShooterCar.BaseClass;
 
 namespace ShooterCar.Utilities
 {
@@ -14,7 +14,7 @@ namespace ShooterCar.Utilities
 
         private EnumStore.Bullet m_BulletType;
 
-        private float m_LongLife, m_DamageAmount, m_BulletSpeed;
+        private float m_LongLife, m_DamageAmount, m_DamageSpread, m_BulletSpeed;
 
         private string m_IgnoreObject = "";
 
@@ -44,7 +44,7 @@ namespace ShooterCar.Utilities
                     StandardType(collision);
                     break;
                 case EnumStore.Bullet.Explode:
-                    ExplodeType(transform.position);
+                    ExplodeType(collision, transform.position);
                     break;
                 default:
                     break;
@@ -59,10 +59,11 @@ namespace ShooterCar.Utilities
             Gizmos.DrawWireSphere(transform.position, 5);
         }
 
-        public void Initialize(EnumStore.Bullet bulletType, float damageAmount, float bulletSpeed)
+        public void Initialize(EnumStore.Bullet bulletType, float damageAmount, float damageSpread, float bulletSpeed)
         {
             m_BulletType = bulletType;
             m_DamageAmount = damageAmount;
+            m_DamageSpread = damageSpread;
             m_BulletSpeed = bulletSpeed;
         }
 
@@ -81,9 +82,14 @@ namespace ShooterCar.Utilities
             }
         }
 
-        private void ExplodeType(Vector3 position)
+        private void ExplodeType(Collider collider, Vector3 position)
         {
             ObjectPooling.Instance.GetExplodeEffect().transform.position = position;
+
+            if (collider.TryGetComponent<HealthSystem>(out var health))
+            {
+                health.TakeDamage(m_DamageAmount);
+            }
 
             //int maxItem = 5;
             //Collider[] collisions = new Collider[maxItem];
@@ -94,7 +100,7 @@ namespace ShooterCar.Utilities
             {
                 if(item.TryGetComponent<HealthSystem>(out var damageable))
                 {
-                    damageable.TakeDamage(m_DamageAmount);
+                    damageable.TakeDamage(m_DamageSpread);
                 }
             }
         }

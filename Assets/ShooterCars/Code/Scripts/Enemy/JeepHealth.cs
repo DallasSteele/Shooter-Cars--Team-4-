@@ -1,5 +1,5 @@
 using ShooterCar.Manager;
-using ShooterCar.Parent;
+using ShooterCar.BaseClass;
 
 namespace ShooterCar.Enemy
 {
@@ -8,6 +8,11 @@ namespace ShooterCar.Enemy
         protected override void Die()
         {
             ObjectPooling.Instance.ReturnEnemy(gameObject);
+        }
+
+        protected override void SetHealthBar()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

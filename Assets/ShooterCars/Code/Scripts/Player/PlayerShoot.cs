@@ -1,7 +1,7 @@
 using UnityEngine;
 
 using ShooterCar.Manager;
-using ShooterCar.Parent;
+using ShooterCar.BaseClass;
 
 namespace ShooterCar.Player
 {

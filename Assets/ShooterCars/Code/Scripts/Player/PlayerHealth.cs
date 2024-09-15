@@ -1,5 +1,5 @@
 using ShooterCar.Manager;
-using ShooterCar.Parent;
+using ShooterCar.BaseClass;
 
 namespace ShooterCar.Player
 {
@@ -8,6 +8,11 @@ namespace ShooterCar.Player
         protected override void Die()
         {
             GameController.Instance.OnGameOver();
+        }
+
+        protected override void SetHealthBar()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

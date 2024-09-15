@@ -9,6 +9,7 @@ namespace ShooterCar.SO
     public class Weapon : ScriptableObject
     {
         [SerializeField] private float m_DamageAmount;
+        [SerializeField] private float m_DamageSpread;
         [SerializeField] private float m_BulletSpeed;
         [SerializeField] private float m_FireRate;
 
@@ -19,6 +20,7 @@ namespace ShooterCar.SO
         [SerializeField] private AudioClip m_SFX;
         
         public float DamageAmount { get { return m_DamageAmount; } }
+        public float DamageSpread { get { return m_DamageSpread; } }
         public float BulletSpeed { get { return m_BulletSpeed; } }
         public float FireRate { get { return m_FireRate; } }
 
@@ -55,7 +57,7 @@ namespace ShooterCar.SO
             if (Time.time >= m_NextShot)
             {
                 Projectile bullet = ObjectPooling.Instance.GetBullet().GetComponent<Projectile>();
-                bullet.Initialize(m_Weapon.BulletType, m_Weapon.DamageAmount, m_Weapon.BulletSpeed);
+                bullet.Initialize(m_Weapon.BulletType, m_Weapon.DamageAmount, m_Weapon.DamageSpread, m_Weapon.BulletSpeed);
                 bullet.Shoot(m_Muzzle, target, ignoreObject);
 
                 //AudioManager.Instance.PlaySFX(m_Weapon.Sound);

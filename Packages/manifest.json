@@ -19,7 +19,7 @@
     "com.unity.ugui": "1.0.0",
     "com.unity.visualscripting": "1.9.4",
     "com.unity.xr.legacyinputhelpers": "2.1.10",
-    "xyz.candycoded.hapticfeedback": "file:D:/Downloads/HapticFeedback-main/HapticFeedback-main/Assets/Plugins/CandyCoded.HapticFeedback",
+    "xyz.candycoded.hapticfeedback": "https://github.com/CandyCoded/HapticFeedback.git#v1.0.3",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c99c4eef651e8b4cb5c428eb6e3ba46, type: 3}
   m_Name: MachineGunTurret
   m_EditorClassIdentifier: 
-  m_DamageAmount: 5
+  m_DamageAmount: 10
+  m_DamageSpread: 0
   m_BulletSpeed: 50
   m_FireRate: 3
   m_BulletType: 0

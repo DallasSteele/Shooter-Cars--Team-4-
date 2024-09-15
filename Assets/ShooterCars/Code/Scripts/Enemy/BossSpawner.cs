@@ -16,7 +16,8 @@ namespace ShooterCar.Enemy
         [SerializeField] private Transform m_BossSpawnPos;
 
         [SerializeField] private LevelManager levelManager;
-        
+
+        [SerializeField] private float bossDuration;
 
         private GameObject Boss { get; set; }
 
@@ -24,12 +25,14 @@ namespace ShooterCar.Enemy
         {
             GameController.Instance.OnBossSpawn += SpawnBoss;
             GameController.Instance.OnBossDefeated += Defeated;
+            GameController.Instance.OnGameRestart += DisableCurrentBoss;
         }
 
         private void OnDisable()
         {
             GameController.Instance.OnBossSpawn -= SpawnBoss;
             GameController.Instance.OnBossDefeated -= Defeated;
+            GameController.Instance.OnGameRestart -= DisableCurrentBoss;
         }
 
         private void TrySpawnBoss()
@@ -45,11 +48,10 @@ namespace ShooterCar.Enemy
             if (Boss == null)
             {
                 Boss = Instantiate(m_Boss, m_BossSpawnPos);
-
-                m_Director.Play(bossSpawn);
-                return;
             }
-            return;
+
+            Boss.SetActive(true);
+            m_Director.Play(bossSpawn);
         }
 
         private void Defeated()
@@ -61,5 +63,10 @@ namespace ShooterCar.Enemy
             levelManager.OnBossDefeated();
         }
 
+        private void DisableCurrentBoss()
+        {
+            Boss.SetActive(false);
+            m_Director.Play(bossDefeat);
+        }
     }
 }

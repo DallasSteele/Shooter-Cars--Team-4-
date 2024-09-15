@@ -21,7 +21,7 @@ namespace ShooterCar.Enemy
 
         public void Start()
         {
-            lvlcompletepanel.SetActive(false);
+            lvlcompletepanel?.SetActive(false);
             isWaitingForNextLevel = false;
 
             //add logics here
@@ -54,7 +54,7 @@ namespace ShooterCar.Enemy
             //nextlevelpanel
             // start the enemy spawning
             isWaitingForNextLevel = true;
-            lvlcompletepanel.SetActive(true);
+            lvlcompletepanel?.SetActive(true);
 
             enemySpawner.StopSpawningEnemies(); //added in the EnemySpawner script
         }
@@ -62,7 +62,7 @@ namespace ShooterCar.Enemy
         public void OnNextButtonClicked()
         {
             // Hide the level complete panel and resume enemy spawning
-            lvlcompletepanel.SetActive(false);
+            lvlcompletepanel?.SetActive(false);
             ResumeGame();
         }
 
