@@ -39,7 +39,6 @@ namespace ShooterCar.BaseClass
         }
 
         protected abstract void SetHealthBar();
-
         protected abstract void Die();
     }
 }

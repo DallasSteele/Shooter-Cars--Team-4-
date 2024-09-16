@@ -28,5 +28,10 @@ namespace ShooterCar.Enemy
 
             m_Weapon.Shoot(m_Player.position, gameObject.tag);
         }
+
+        public void SetFireInterval(float fireInterval)
+        {
+            m_FireInterval = fireInterval;
+        }
     }
 }

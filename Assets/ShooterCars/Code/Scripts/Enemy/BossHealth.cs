@@ -8,26 +8,58 @@ namespace ShooterCar.Enemy
 {
     public class BossHealth : HealthSystem
     {
+        [SerializeField] private EnemyShoot bossShoot;
         [SerializeField] private float duration;
 
         private Slider healthBar;
+
+        private bool stopChecking;
         private float currentDuration;
 
         private void Update()
         {
-            if (currentDuration <= duration)
-                currentDuration += Time.fixedDeltaTime;
-            else
-                GameController.Instance.OnGameRestart();
+            CountdownBossTimer();
+        }
+
+        private void OnEnable()
+        {
+            GameController.Instance.OnBossDefeated += ResetBoss;
+            GameController.Instance.OnGameRestart += ResetBoss;
+
+            InitialStatus();
         }
 
         private void OnDisable()
         {
-            healthBar.transform.parent.gameObject.SetActive(false);
+            GameController.Instance.OnBossDefeated -= ResetBoss;
+            GameController.Instance.OnGameRestart -= ResetBoss;
+        }
+
+        private void CountdownBossTimer()
+        {
+            if (stopChecking) return;
+
+            if (currentDuration <= duration + 7)
+            {
+                currentDuration += Time.deltaTime;
+            }
+            else
+            {
+                GameController.Instance.OnGameRestart();
+                stopChecking = true;
+            }
+        }
+
+        private void ResetBoss()
+        {
+            bossShoot.SetFireInterval(7);
         }
 
         protected override void InitialStatus()
         {
+            currentDuration = 0;
+            stopChecking = false;
+
             if (m_CurrentHealth <= 0)
                 MaxHealth();
 
@@ -36,17 +68,12 @@ namespace ShooterCar.Enemy
 
         protected override void Die()
         {
-            healthBar.transform.parent.gameObject.SetActive(false);
-
             GameController.Instance.OnBossDefeated();
         }
 
         protected override void SetHealthBar()
         {
-            currentDuration = 0;
-
             healthBar = InterfaceHandle.Instance.bossHealthBar;
-            healthBar.transform.parent.gameObject.SetActive(true);
             healthBar.maxValue = maxHealth;
             healthBar.value = m_CurrentHealth;
         }

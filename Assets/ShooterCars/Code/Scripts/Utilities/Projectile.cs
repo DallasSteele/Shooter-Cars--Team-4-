@@ -107,7 +107,7 @@ namespace ShooterCar.Utilities
 
         private void ReturnBullet(string x = null)
         {
-            if (x != null) Debug.LogWarning(x);
+            //if (x != null) Debug.LogWarning(x);
 
             m_LongLife = 0;
             m_Trail.Clear();

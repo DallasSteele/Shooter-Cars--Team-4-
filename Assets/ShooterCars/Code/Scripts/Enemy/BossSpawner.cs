@@ -17,8 +17,7 @@ namespace ShooterCar.Enemy
 
         [SerializeField] private LevelManager levelManager;
 
-        [SerializeField] private float bossDuration;
-
+        private GameObject healthBar;
         private GameObject Boss { get; set; }
 
         private void OnEnable()
@@ -52,21 +51,24 @@ namespace ShooterCar.Enemy
 
             Boss.SetActive(true);
             m_Director.Play(bossSpawn);
+
+            healthBar = InterfaceHandle.Instance.bossHealthBar.gameObject;
+            healthBar.transform.parent.gameObject.SetActive(true);
         }
 
         private void Defeated()
         {
             Destroy(Boss);
+            DisableCurrentBoss();
 
-            m_Director.Play(bossDefeat);
             //notify level manager that the boss is defeated
             levelManager.OnBossDefeated();
         }
 
         private void DisableCurrentBoss()
         {
-            Boss.SetActive(false);
             m_Director.Play(bossDefeat);
+            healthBar.transform.parent.gameObject.SetActive(false);
         }
     }
 }
