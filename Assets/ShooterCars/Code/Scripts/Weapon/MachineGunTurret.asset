@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DamageAmount: 10
   m_DamageSpread: 0
-  m_BulletSpeed: 50
+  m_BulletSpeed: 70
   m_FireRate: 3
   m_BulletType: 0
   m_Model: {fileID: -6385670154585085709, guid: 018566b757c1ed744bd8c1ef78dfa5c1, type: 3}

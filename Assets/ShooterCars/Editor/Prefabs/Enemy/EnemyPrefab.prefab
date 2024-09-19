@@ -7048,7 +7048,7 @@ GameObject:
   - component: {fileID: 3928619398950955145}
   - component: {fileID: 2469599420836981889}
   - component: {fileID: -4302229997487903080}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: EnemyPrefab
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -7106,7 +7106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f396be44f4b3a4d9861755b01aeaa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_WeaponData: {fileID: 11400000, guid: 10ef39be7179b1f4fa1baf95758d79cc, type: 2}
+  m_WeaponData: {fileID: 11400000, guid: 2cb93cbefab4b74459f7226869c10552, type: 2}
   m_WeaponSlot: {fileID: 370632369389873022}
   m_Cooldown: 2
 --- !u!114 &2469599420836981889
@@ -7135,8 +7135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159f8f5a8e991864f9069034bba82235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 5811483242888047872}
   m_MaxHealth: 100
+  healthBar: {fileID: 5811483242888047872}
 --- !u!1 &6721350262745370677
 GameObject:
   m_ObjectHideFlags: 0
@@ -7934,9 +7934,9 @@ Transform:
   m_GameObject: {fileID: 7390945813186542065}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 0, y: 1.8, z: 0}
+  m_LocalScale: {x: 1, y: 0.34, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6561012688757077458}
   - {fileID: 5811483242888047872}
