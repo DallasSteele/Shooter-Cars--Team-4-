@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 
 using ShooterCar.Manager;
+using System.Collections;
 
 namespace ShooterCar.Enemy
 {
@@ -58,9 +59,8 @@ namespace ShooterCar.Enemy
 
         private void Defeated()
         {
-            Destroy(Boss);
             DisableCurrentBoss();
-
+            StartCoroutine(WaitForCinematic());
             //notify level manager that the boss is defeated
             levelManager.OnBossDefeated();
         }
@@ -69,6 +69,12 @@ namespace ShooterCar.Enemy
         {
             m_Director.Play(bossDefeat);
             healthBar.transform.parent.gameObject.SetActive(false);
+        }
+
+        private IEnumerator WaitForCinematic()
+        {
+            yield return new WaitForSeconds(6);
+            Destroy(Boss);
         }
     }
 }
