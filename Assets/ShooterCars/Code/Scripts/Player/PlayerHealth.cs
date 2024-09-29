@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using TMPro;
 using ShooterCar.Manager;
 using ShooterCar.BaseClass;
 
@@ -8,7 +8,7 @@ namespace ShooterCar.Player
     public class PlayerHealth : HealthSystem
     {
         [SerializeField] private Transform healthBar;
-
+        [SerializeField] private GameObject gameOverUI; //UI gameover added
         [SerializeField] private float healthTimer;
 
         private float lastHealth;
@@ -30,11 +30,20 @@ namespace ShooterCar.Player
                 healthBar.parent.gameObject.SetActive(true);
                 healthInterval = 0;
                 lastHealth = m_CurrentHealth;
+
+                //check if health is zero
+                if (m_CurrentHealth <= 0)
+                {
+                    Die();
+                }
             }
         }
 
         protected override void Die()
         {
+            //show gameover UI
+            Time.timeScale = 0f;
+            gameOverUI.SetActive(true);
             GameController.Instance.OnGameOver();
         }
 
