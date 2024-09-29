@@ -1,3 +1,5 @@
+using System.Collections;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +11,9 @@ namespace ShooterCar.Enemy
     public class BossHealth : HealthSystem
     {
         [SerializeField] private EnemyShoot bossShoot;
+        [SerializeField] private ParticleSystem explodeParticle;
+        [SerializeField] private Animator anim;
+
         [SerializeField] private float duration;
 
         private Slider healthBar;
@@ -45,7 +50,8 @@ namespace ShooterCar.Enemy
             }
             else
             {
-                GameController.Instance.OnGameRestart();
+                GameController.Instance.OnBossDefeated();
+                anim.Play("Escape");
                 stopChecking = true;
             }
         }
@@ -69,6 +75,15 @@ namespace ShooterCar.Enemy
         protected override void Die()
         {
             GameController.Instance.OnBossDefeated();
+            stopChecking = true;
+            explodeParticle.Play();
+            StartCoroutine(WaitForDestroy());
+        }
+
+        private IEnumerator WaitForDestroy()
+        {
+            yield return new WaitForSeconds(2.5f);
+            Destroy(gameObject);
         }
 
         protected override void SetHealthBar()
