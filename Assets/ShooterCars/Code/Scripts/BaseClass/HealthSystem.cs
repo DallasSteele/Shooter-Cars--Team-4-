@@ -26,7 +26,7 @@ namespace ShooterCar.BaseClass
             m_CurrentHealth = maxHealth;
         }
 
-        public void TakeDamage(float damageAmount)
+        public virtual void TakeDamage(float damageAmount)
         {
             m_CurrentHealth -= damageAmount;
             if(m_CurrentHealth <= 0)

@@ -39,6 +39,13 @@ namespace ShooterCar.Player
             }
         }
 
+        public override void TakeDamage(float damageAmount)
+        {
+            base.TakeDamage(damageAmount);
+
+            GameController.Instance.OnHit();
+        }
+
         protected override void Die()
         {
             //show gameover UI

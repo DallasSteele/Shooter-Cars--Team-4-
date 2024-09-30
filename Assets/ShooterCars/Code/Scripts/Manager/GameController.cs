@@ -15,6 +15,7 @@ namespace ShooterCar.Manager
         public GameAction OnBossDefeated { get; set; } = delegate { };
         public GameAction OnEnemyDestroy { get; set; } = delegate { };
         public GameAction OnRoadLoop { get; set; } = delegate { };
+        public GameAction OnHit {  get; set; } = delegate { };
 
         public static GameController Instance { get; private set; }
         public Camera MainCamera { get { return m_Camera; } }
