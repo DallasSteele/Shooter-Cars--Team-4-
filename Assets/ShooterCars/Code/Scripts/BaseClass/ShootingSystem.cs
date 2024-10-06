@@ -12,6 +12,7 @@ namespace ShooterCar.BaseClass
         [SerializeField] private Transform m_WeaponSlot;
 
         protected WeaponView m_Weapon { get; private set; }
+        protected WeaponStore weaponModel { get; private set; }
 
         public Weapon WeaponData
         {
@@ -44,7 +45,7 @@ namespace ShooterCar.BaseClass
                 Destroy(m_WeaponSlot.GetChild(0).gameObject);
             }
 
-            WeaponStore weaponModel = WeaponData.InitializePrefab(m_WeaponSlot);
+            weaponModel = WeaponData.InitializePrefab(m_WeaponSlot);
             m_Weapon = new WeaponView(WeaponData, weaponModel.Muzzle);
         }
     }

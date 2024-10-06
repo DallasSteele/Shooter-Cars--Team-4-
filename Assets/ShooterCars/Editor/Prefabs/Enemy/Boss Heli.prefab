@@ -8761,7 +8761,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3525682770442188791}
   - component: {fileID: 3192545547391544691}
-  - component: {fileID: 3928619398950955145}
+  - component: {fileID: 8293160117550231945}
   - component: {fileID: 2469599420836981889}
   - component: {fileID: -6780080475108890170}
   - component: {fileID: 6508694498395945222}
@@ -8812,9 +8812,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.1284312, z: 1.1888758}
-  m_Center: {x: 0, y: 0.5911668, z: 0.8143603}
---- !u!114 &3928619398950955145
+  m_Size: {x: 1, y: 0.84358644, z: 1.6443148}
+  m_Center: {x: 0, y: 0.7335892, z: 1.04208}
+--- !u!114 &8293160117550231945
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8823,7 +8823,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6718596833257775620}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39f396be44f4b3a4d9861755b01aeaa8, type: 3}
+  m_Script: {fileID: 11500000, guid: cccff7f90e2a48347903fa5d7aea198d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_WeaponData: {fileID: 11400000, guid: f2f31a3c1f58b8647bd33c83dc3f40ef, type: 2}
@@ -8856,7 +8856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MaxHealth: 500
-  bossShoot: {fileID: 3928619398950955145}
+  bossShoot: {fileID: 8293160117550231945}
   explodeParticle: {fileID: 637947835564184529}
   anim: {fileID: 4933656601664773948}
   duration: 30
@@ -8976,7 +8976,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6718596833257775620}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 5590dbfe16cf5a6408977bfe78e20b0f, type: 2}
   m_CullingMode: 0
