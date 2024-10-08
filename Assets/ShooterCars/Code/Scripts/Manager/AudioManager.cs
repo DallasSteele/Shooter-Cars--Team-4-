@@ -52,6 +52,7 @@ namespace ShooterCar.Manager
 
         private void VictoryBGM()
         {
+            m_BGMSource.loop = false;
             PlayBGM(victoryBGM);
         }
 

@@ -31,7 +31,7 @@ namespace ShooterCar.BaseClass
             InitializeWeaponView();
         }
 
-        protected virtual void Update()
+        private void Update()
         {
             Shoot();
         }
