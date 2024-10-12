@@ -10,7 +10,7 @@ namespace ShooterCar.Enemy
 {
     public class BossHealth : HealthSystem
     {
-        [SerializeField] private EnemyShoot bossShoot;
+        [SerializeField] private BossShoot bossShoot;
         [SerializeField] private ParticleSystem explodeParticle;
         [SerializeField] private Animator anim;
 
@@ -51,6 +51,7 @@ namespace ShooterCar.Enemy
             else
             {
                 GameController.Instance.OnBossDefeated();
+                anim.enabled = true;
                 anim.Play("Escape");
                 stopChecking = true;
             }

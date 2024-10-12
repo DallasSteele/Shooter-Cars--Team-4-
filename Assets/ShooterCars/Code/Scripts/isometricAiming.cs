@@ -15,6 +15,8 @@ namespace BarthaSzabolcs.IsometricAiming
         [SerializeField] private LayerMask groundMask;
         [SerializeField] private Weapon m_WeaponData;
         [SerializeField] private Transform m_WeaponSlot;
+        [SerializeField] private RectTransform crosshair;
+        [SerializeField] private float aimSpeed;
 
         #endregion
 
@@ -23,6 +25,9 @@ namespace BarthaSzabolcs.IsometricAiming
         private Camera mainCamera;
         private RaycastHit hit;
         private WeaponView m_Weapon;
+
+        private Vector2 lastTouchPosition;
+        private bool isTouching;
 
         private float m_NextShot;
 
@@ -54,33 +59,34 @@ namespace BarthaSzabolcs.IsometricAiming
             }
         }
 
-        private void OnEnable()
-        {
-            GameController.Instance.OnGameStart += SetGunModel;
-        }
-
-        private void OnDisable()
-        {
-            GameController.Instance.OnGameStart -= SetGunModel;
-        }
-
         #endregion
-
-        private void SetGunModel()
-        {
-            //m_Weapon.Initialize(m_WeaponSlot);
-        }
 
         private void Aim()
         {
             var (success, position) = GetMousePosition();
-            if (success)
-            {
-                // Calculate the direction
-                //var direction = position - m_WeaponData.Muzzle.position;
+            Touch touch = Input.GetTouch(0);
 
-                // Make the transform look in the direction.
-                //m_WeaponData.Muzzle.forward = direction;
+            if (touch.phase == TouchPhase.Began)
+            {
+                // Capture the initial touch position
+                lastTouchPosition = touch.position;
+                isTouching = true;
+            }
+            else if (touch.phase == TouchPhase.Moved && isTouching)
+            {
+                // Calculate how much the touch has moved
+                Vector2 deltaPosition = touch.position - lastTouchPosition;
+
+                // Move the crosshair by the delta amount
+                crosshair.anchoredPosition += deltaPosition * aimSpeed;
+
+                // Update the last touch position for the next frame
+                lastTouchPosition = touch.position;
+            }
+            else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+            {
+                // Stop tracking touch movement when the touch ends
+                isTouching = false;
             }
         }
 
@@ -109,7 +115,7 @@ namespace BarthaSzabolcs.IsometricAiming
 
         private (bool success, Vector3 position) GetMousePosition()
         {
-            var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            var ray = mainCamera.ScreenPointToRay(crosshair.position);
 
             if (Physics.Raycast(ray, out hit, 100, groundMask))
             {

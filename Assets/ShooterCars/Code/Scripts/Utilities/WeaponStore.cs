@@ -1,3 +1,4 @@
+using ShooterCar.BaseClass;
 using UnityEngine;
 
 namespace ShooterCar.Utilities
@@ -6,6 +7,21 @@ namespace ShooterCar.Utilities
     {
         [SerializeField] private Transform m_Muzzle;
 
+        public BoxCollider weaponCollider { get; private set; }
+
         public Transform Muzzle {  get { return m_Muzzle; } }
+
+        private void Awake()
+        {
+            weaponCollider = GetComponent<BoxCollider>();
+            ShootingSystem shoot = GetComponentInParent<ShootingSystem>();
+            if (shoot != null)
+                tag = shoot.tag;
+        }
+
+        public void AddCollider()
+        {
+            weaponCollider.enabled = true;
+        }
     }
 }

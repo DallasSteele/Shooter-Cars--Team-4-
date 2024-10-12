@@ -52,12 +52,12 @@ namespace ShooterCar.Manager
 
         private void VictoryBGM()
         {
+            m_BGMSource.loop = false;
             PlayBGM(victoryBGM);
         }
 
         private void PlayBGM(AudioClip clip)
         {
-            Debug.Log("gg");
             m_BGMSource.clip = clip;
             m_BGMSource.Play();
         }
