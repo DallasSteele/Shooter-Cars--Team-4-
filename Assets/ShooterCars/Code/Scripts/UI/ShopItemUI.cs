@@ -32,6 +32,31 @@ public class ShopItemUI : MonoBehaviour
         {
             buyButton.onClick.AddListener(() => ShopManager.Instance.PurchaseItem(item) );
         }
+
+        if (item == null)
+        {
+            Debug.LogError("ShopItem is null!");
+            return;
+        }
+
+        // Check if PlayerInventory.Instance is null or other dependencies
+        if (PlayerInventory.Instance == null)
+        {
+            Debug.LogError("PlayerInventory instance is null!");
+            return;
+        }
+
+        if (PlayerInventory.Instance.HasItem(item.itemName))
+        {
+            // Set item details here, only if item is valid
+            itemNameText.text = item.itemName;
+            itemCostText.text = $"Cost: {item.cost}";
+            itemIcon.sprite = item.itemIcon;
+        }
+        else
+        {
+            Debug.LogError("Player doesn't have this item.");
+        }
     }
 
     //mark the item as purchased in the UI

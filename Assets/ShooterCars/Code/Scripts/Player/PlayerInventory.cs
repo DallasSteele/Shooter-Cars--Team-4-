@@ -6,7 +6,7 @@ public class PlayerInventory : MonoBehaviour
 {
     public static PlayerInventory Instance { get; private set; }
     private List<string> ownedItems = new List<string>();
-    private void awake()
+    private void Awake()
     {
         if (Instance == null)
         {

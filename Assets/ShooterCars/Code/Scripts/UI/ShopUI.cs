@@ -39,10 +39,26 @@ public class ShopUI : MonoBehaviour
     {
         foreach (ShopItem item in itemsForSale)
         {
-            GameObject newItemUI = Instantiate(shopItemPrefab, shopItemContainer);
+            if (item == null)
+        {
+            Debug.LogError("Item is null!");
+            continue;
+        }
+
+        Debug.Log($"Initializing item: {item.itemName}, Type: {item.itemType}");
+            //dynamically choose the correct container based on the item type/category
+            Transform targetContainer = item.itemType switch
+            {
+                ItemType.Car => carItemContainer,
+                ItemType.CarSkin => carSkinItemContainer,
+                ItemType.TurretSkin => turretSkinItemContainer,
+                _ => shopItemContainer // Default or backup container if type not matched
+            };
+
+            GameObject newItemUI = Instantiate(shopItemPrefab, targetContainer);
             ShopItemUI itemUI = newItemUI.GetComponent<ShopItemUI>();
 
-            //set the item UI details (name, cost, and icon)
+            // Set the item UI details (name, cost, and icon)
             itemUI.SetItemDetails(item);
         }
     }
@@ -89,6 +105,7 @@ public class ShopUI : MonoBehaviour
 
     private void PopulatePanel(ItemType type)
     {
+
         Transform container = type switch
         {
             ItemType.Car => carItemContainer,
@@ -97,7 +114,12 @@ public class ShopUI : MonoBehaviour
             _ => null
         };
 
-        if (container == null) return;
+        // Check if the container is null
+        if (container == null)
+        {
+            Debug.LogError($"Container for {type} is null.");
+            return;
+        }
 
         // Clear the existing items in the container
         foreach (Transform child in container)
@@ -108,15 +130,37 @@ public class ShopUI : MonoBehaviour
         // Populate the container with the correct items
         foreach (ShopItem item in itemsForSale)
         {
+            if (item == null)
+            {
+                Debug.LogError("Null item in itemsForSale!");
+                continue;
+            }
+
+
             if (item.itemType == type)
             {
+                // Check if the shopItemPrefab is set
+                if (shopItemPrefab == null)
+                {
+                    Debug.LogError("Shop item prefab is not assigned.");
+                    return;
+                }
+
                 GameObject newItemUI = Instantiate(shopItemPrefab, container);
                 ShopItemUI itemUI = newItemUI.GetComponent<ShopItemUI>();
                 itemUI.SetItemDetails(item);
 
+                // Check if itemUI is assigned correctly
+                if (itemUI == null)
+                {
+                    Debug.LogError("ShopItemUI component is missing on the instantiated prefab.");
+                    continue; // Skip to the next item if itemUI is null
+                }
 
             }
         }
     }
+
+
 
 }
