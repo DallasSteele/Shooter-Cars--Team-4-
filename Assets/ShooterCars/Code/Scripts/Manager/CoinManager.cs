@@ -10,12 +10,12 @@ public class CoinManager : MonoBehaviour
     private int startCoins = 100;
     //public GameObject CurrencyUI;
 
-    private void awake()
+    private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); //just making sure its working
+            //okay,its working//DontDestroyOnLoad(gameObject); //just making sure its working
         }
         else
         {

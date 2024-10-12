@@ -17,4 +17,7 @@ public class ShopItem : ScriptableObject
     public Sprite itemIcon; //ui display, null is possible
     public bool isConsumable; //true if the item is one-time use {CHECK IF ITS ONE TIME USE}
     public ItemType itemType; //determines if its either one of the 3
+
+    [Header("Skin Specific Data")]
+    public Material material; //carskin / turretskin goes here
 }

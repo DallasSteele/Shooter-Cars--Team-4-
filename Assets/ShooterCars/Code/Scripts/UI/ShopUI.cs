@@ -10,10 +10,10 @@ public class ShopUI : MonoBehaviour
 
     [SerializeField] private Transform shopItemContainer;
     [SerializeField] private GameObject shopItemPrefab;
-
     [SerializeField] private Transform carItemContainer;
     [SerializeField] private Transform carSkinItemContainer;
     [SerializeField] private Transform turretSkinItemContainer;
+    [SerializeField] private CarController playerCarController;  //ref to the player's car controller
 
     public ShopItem[] itemsForSale;
 
@@ -113,6 +113,8 @@ public class ShopUI : MonoBehaviour
                 GameObject newItemUI = Instantiate(shopItemPrefab, container);
                 ShopItemUI itemUI = newItemUI.GetComponent<ShopItemUI>();
                 itemUI.SetItemDetails(item);
+
+
             }
         }
     }
