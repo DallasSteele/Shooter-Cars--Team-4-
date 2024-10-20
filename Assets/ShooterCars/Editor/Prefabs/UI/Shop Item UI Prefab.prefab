@@ -529,7 +529,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Buy
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -652,5 +652,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemNameText: {fileID: 6518269593674430993}
   itemCostText: {fileID: 368726946175139639}
+  statusText: {fileID: 2262754058761598387}
   itemIcon: {fileID: 4601019550189135082}
   buyButton: {fileID: 6691780664203020804}

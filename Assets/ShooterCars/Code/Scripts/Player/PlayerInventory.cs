@@ -6,6 +6,9 @@ public class PlayerInventory : MonoBehaviour
 {
     public static PlayerInventory Instance { get; private set; }
     private List<string> ownedItems = new List<string>();
+    private string equippedItem;
+    public CarController carController;
+
     private void Awake()
     {
         if (Instance == null)
@@ -35,11 +38,31 @@ public class PlayerInventory : MonoBehaviour
         return ownedItems.Contains(itemName);
     }
 
+    // Equip an item
+    public void EquipItem(string itemName)
+    {
+        if (HasItem(itemName))
+        {
+            equippedItem = itemName;
+            SaveInventory();
+            carController.SetCarSkin(itemName);
+            Debug.Log($"Car skin {itemName} applied.");
+        }
+    }
+
+    // Check if the item is equipped
+    public bool IsEquipped(string itemName)
+    {
+        return equippedItem == itemName;
+        // Call the method that updates the car with the new skin  
+    }
+
     //save the player's inventory
     private void SaveInventory()
     {
         //convert list to string to save in playerprefs (simple solution)
         PlayerPrefs.SetString("OwnedItems", string.Join(",", ownedItems));
+        PlayerPrefs.SetString("EquippedItem", equippedItem);
         PlayerPrefs.Save();
     }
 
@@ -51,6 +74,8 @@ public class PlayerInventory : MonoBehaviour
         {
             ownedItems = new List<string>(savedItems.Split(','));
         }
+
+        equippedItem = PlayerPrefs.GetString("EquippedItem", "");
     }
 
     private void Start()

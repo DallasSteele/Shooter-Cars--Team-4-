@@ -35,4 +35,5 @@ public class CurrencyUI : MonoBehaviour
         coinText.text = $"Coins: {coins}";
     }
 
+
 }

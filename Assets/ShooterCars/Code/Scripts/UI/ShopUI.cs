@@ -124,7 +124,13 @@ public class ShopUI : MonoBehaviour
         // Clear the existing items in the container
         foreach (Transform child in container)
         {
-            Destroy(child.gameObject);
+            //Destroy(child.gameObject);
+            ShopItemUI itemUI = child.GetComponent<ShopItemUI>();
+            if (itemUI != null)
+            {
+                ShopItem item = itemUI.GetItem(); // Assuming you have a GetItem() method in ShopItemUI
+                UpdateItemUI(itemUI, item); // Update the UI for each item
+            }
         }
 
         // Populate the container with the correct items
@@ -158,6 +164,42 @@ public class ShopUI : MonoBehaviour
                 }
 
             }
+        }
+    }
+
+    // Update the item UI based on whether it's bought, equipped, or available
+    private void UpdateItemUI(ShopItemUI itemUI, ShopItem item)
+    {
+        if (PlayerInventory.Instance.HasItem(item.itemName))
+        {
+            if (PlayerInventory.Instance.IsEquipped(item.itemName))
+            {
+                itemUI.SetItemStatus("Equipped"); // You can update your button text here
+                itemUI.DisableBuyButton(); // Disable the buy/equip button
+            }
+            else
+            {
+                itemUI.SetItemStatus("Equip"); // If bought but not equipped, offer the option to equip
+                itemUI.EnableBuyButton(); // Re-enable the button for equipping
+                itemUI.SetEquipButtonAction(() =>
+                {
+                    PlayerInventory.Instance.EquipItem(item.itemName);
+                    // After equipping, update the UI
+                    UpdateItemUI(itemUI, item); // Refresh the UI after equipping
+                });
+            }
+        }
+        else
+        {
+            //blom dibeli, show "Buy" option
+            itemUI.SetItemStatus("Buy"); // Show a 'Buy' button
+            itemUI.EnableBuyButton(); // Make the button interactive
+            itemUI.SetBuyButtonAction(() =>
+            {
+                ShopManager.Instance.PurchaseItem(item);
+                // After purchase, update the UI
+                UpdateItemUI(itemUI, item); // Refresh the UI after buying
+            });
         }
     }
 

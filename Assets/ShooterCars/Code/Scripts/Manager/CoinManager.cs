@@ -7,7 +7,7 @@ public class CoinManager : MonoBehaviour
     public static CoinManager Instance { get; private set; }
 
     private int currentCoins;
-    private int startCoins = 100;
+    private int startCoins = 50000;
     //public GameObject CurrencyUI;
 
     private void Awake()
@@ -60,6 +60,14 @@ public class CoinManager : MonoBehaviour
     public int GetCurrentCoins()
     {
         return currentCoins;
+    }
+
+    // Add coins to the player's total
+    public void GetRichQuick(int amount)
+    {
+        currentCoins += amount;
+        CurrencyUI.Instance.UpdateCoinDisplay(currentCoins);
+        Debug.Log("Coins Added: " + amount + ". New Total: " + currentCoins);
     }
 
     //save coin count
