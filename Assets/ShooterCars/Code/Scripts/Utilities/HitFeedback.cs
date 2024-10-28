@@ -1,5 +1,7 @@
-using ShooterCar.Manager;
 using System.Collections;
+
+using ShooterCar.Manager;
+
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 

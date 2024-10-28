@@ -18,6 +18,8 @@ namespace ShooterCar.SO
         [SerializeField] private WeaponStore m_Model;
         
         [SerializeField] private AudioClip m_SFX;
+
+        [SerializeField] private TrailRenderer trail;
         
         public float DamageAmount { get { return m_DamageAmount; } }
         public float DamageSpread { get { return m_DamageSpread; } }
@@ -27,6 +29,8 @@ namespace ShooterCar.SO
         public EnumStore.Bullet BulletType { get { return m_BulletType; } }
         
         public AudioClip Sound { get { return m_SFX; } }
+
+        public TrailRenderer Trail { get { return trail; } }
 
         public WeaponStore InitializePrefab(Transform weaponSlot)
         {
@@ -57,7 +61,16 @@ namespace ShooterCar.SO
             if (Time.time >= m_NextShot)
             {
                 Projectile bullet = ObjectPooling.Instance.GetBullet().GetComponent<Projectile>();
-                bullet.Initialize(m_Weapon.BulletType, m_Weapon.DamageAmount, m_Weapon.DamageSpread, m_Weapon.BulletSpeed);
+
+                if (m_Weapon.BulletType == EnumStore.Bullet.Laser)
+                {
+                    GameController.Instance.Line.enabled = true;
+                    GameController.Instance.Line.SetPosition(0, m_Muzzle.position);
+                    GameController.Instance.Line.SetPosition(1, target);
+                    ObjectPooling.Instance.GetLaserEffect().transform.position = target;
+                }
+
+                bullet.Initialize(m_Weapon.BulletType, m_Weapon.DamageAmount, m_Weapon.DamageSpread, m_Weapon.BulletSpeed, m_Weapon.Trail);
                 bullet.Shoot(m_Muzzle, target, ignoreObject);
 
                 AudioManager.Instance.PlaySFX(m_Weapon.Sound);

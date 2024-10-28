@@ -1903,7 +1903,6 @@ GameObject:
   - component: {fileID: 8965927279815298960}
   - component: {fileID: -6385670154585085709}
   - component: {fileID: 4479624774398279242}
-  - component: {fileID: 4335238335316245721}
   m_Layer: 0
   m_Name: MachineGun
   m_TagString: Untagged
@@ -1961,19 +1960,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0.12}
---- !u!114 &4335238335316245721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1934026246301718416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49d2b4be9388d2341874c4b5e3b13e2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MaxHealth: 200
 --- !u!1 &1981547462955187449
 GameObject:
   m_ObjectHideFlags: 0

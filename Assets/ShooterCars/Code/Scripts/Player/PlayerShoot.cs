@@ -61,6 +61,9 @@ namespace ShooterCar.Player
                 GetTouchPosition();
                 m_Weapon.Shoot(hit.point, gameObject.tag);
             }
+            
+            if(Input.GetButtonUp("Fire1"))
+                GameController.Instance.Line.enabled = false;
         }
     }
 }

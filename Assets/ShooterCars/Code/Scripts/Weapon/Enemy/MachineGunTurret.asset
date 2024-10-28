@@ -19,3 +19,4 @@ MonoBehaviour:
   m_BulletType: 0
   m_Model: {fileID: -6385670154585085709, guid: 018566b757c1ed744bd8c1ef78dfa5c1, type: 3}
   m_SFX: {fileID: 8300000, guid: 1769422d53d2efd49aa0eef983ff64c5, type: 3}
+  trail: {fileID: 6719857316420412967, guid: 65ff63a6a2a3f654595388d9341a7b8a, type: 3}

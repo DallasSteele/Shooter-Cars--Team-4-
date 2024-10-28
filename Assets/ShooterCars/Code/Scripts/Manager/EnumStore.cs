@@ -5,7 +5,8 @@ namespace ShooterCar.Manager
         public enum Bullet
         {
             Standard,
-            Explode
+            Explode,
+            Laser
         }
     }
 }

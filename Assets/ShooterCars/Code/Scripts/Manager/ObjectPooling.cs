@@ -46,6 +46,8 @@ namespace ShooterCar.Manager
         [Tooltip("Explosion effect for Explode bullet type")]
         [SerializeField] private GameObject m_ExplosionEffect;
 
+        [SerializeField] private GameObject laserEffect;
+
         [Header("Looping Road Properties")]
         [SerializeField] private GameObject[] m_Roads;
         [SerializeField] private GameObject m_RoadList;
@@ -61,7 +63,8 @@ namespace ShooterCar.Manager
         /// <summary>
         /// Pool variable for explosion effect
         /// </summary>
-        private Queue<GameObject> m_ParticlePool = new Queue<GameObject>();
+        private Queue<GameObject> m_ExplodeEffect = new Queue<GameObject>();
+        private Queue<GameObject> laserEffectPool = new Queue<GameObject>();
         private Queue<GameObject> m_RoadPool = new Queue<GameObject>();
 
         /// <summary>
@@ -75,7 +78,7 @@ namespace ShooterCar.Manager
 
         private void Awake()
         {
-            if(Instance != null && Instance != this)
+            if (Instance != null && Instance != this)
             {
                 Destroy(gameObject);
                 return;
@@ -119,7 +122,8 @@ namespace ShooterCar.Manager
 
             for (int i = 0; i < 4; i++)
             {
-                CreatePool(m_ExplosionEffect, m_BulletList, m_ParticlePool);
+                CreatePool(m_ExplosionEffect, m_BulletList, m_ExplodeEffect);
+                CreatePool(laserEffect, m_BulletList, laserEffectPool);
             }
         }
 
@@ -143,9 +147,9 @@ namespace ShooterCar.Manager
         /// <param name="objectPrefab">Object to instantiate in the pool</param>
         /// <param name="objectParent">Parent of all the objects inside the pool</param>
         /// <returns>Object taken from the pool</returns>
-        private  GameObject GetObject(Queue<GameObject> pool, GameObject objectPrefab, GameObject objectParent)
+        private GameObject GetObject(Queue<GameObject> pool, GameObject objectPrefab, GameObject objectParent)
         {
-            if(pool.Count == 0) CreatePool(objectPrefab, objectParent, pool);
+            if (pool.Count == 0) CreatePool(objectPrefab, objectParent, pool);
 
             GameObject objectPool = pool.Dequeue();
             objectPool.SetActive(true);
@@ -188,8 +192,15 @@ namespace ShooterCar.Manager
         /// <returns>Explode particle taken from the pool</returns>
         public GameObject GetExplodeEffect()
         {
-            GameObject effect = GetObject(m_ParticlePool, m_ExplosionEffect, m_BulletList);
-            StartCoroutine(ReturnExplodeEffect(effect));
+            GameObject effect = GetObject(m_ExplodeEffect, m_ExplosionEffect, m_BulletList);
+            StartCoroutine(ReturnEffect(effect, m_ExplodeEffect));
+            return effect;
+        }
+
+        public GameObject GetLaserEffect()
+        {
+            GameObject effect = GetObject(laserEffectPool, laserEffect, m_BulletList);
+            StartCoroutine(ReturnEffect(effect, laserEffectPool));
             return effect;
         }
 
@@ -204,7 +215,7 @@ namespace ShooterCar.Manager
         /// <param name="effect">Particle gameObject to return</param>
         private void ReturnExplode(GameObject effect)
         {
-            ReturnObject(effect, m_ParticlePool);
+            ReturnObject(effect, m_ExplodeEffect);
         }
 
         /// <summary>
@@ -238,10 +249,10 @@ namespace ShooterCar.Manager
         /// </summary>
         /// <param name="effect">Explode particle gameObject to return</param>
         /// <returns>Default timer</returns>
-        private IEnumerator ReturnExplodeEffect(GameObject effect)
+        private IEnumerator ReturnEffect(GameObject effect, Queue<GameObject> pool)
         {
             yield return new WaitForSeconds(.6f);
-            ReturnExplode(effect);
+            ReturnObject(effect, pool);
         }
     }
 }

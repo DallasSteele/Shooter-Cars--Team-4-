@@ -46,6 +46,9 @@ namespace ShooterCar.Utilities
                 case EnumStore.Bullet.Explode:
                     ExplodeType(collision, transform.position);
                     break;
+                case EnumStore.Bullet.Laser:
+                    StandardType(collision);
+                    break;
                 default:
                     break;
             }
@@ -59,12 +62,25 @@ namespace ShooterCar.Utilities
             Gizmos.DrawWireSphere(transform.position, 5);
         }
 
-        public void Initialize(EnumStore.Bullet bulletType, float damageAmount, float damageSpread, float bulletSpeed)
+        public void Initialize(EnumStore.Bullet bulletType, float damageAmount, float damageSpread, float bulletSpeed, TrailRenderer trail)
         {
             m_BulletType = bulletType;
             m_DamageAmount = damageAmount;
             m_DamageSpread = damageSpread;
             m_BulletSpeed = bulletSpeed;
+
+            if (trail == null)
+            {
+                m_Trail.enabled = false;
+                return;
+            }
+            m_Trail.enabled = true;
+            m_Trail.startWidth = trail.startWidth;
+            m_Trail.endWidth = trail.endWidth;
+            m_Trail.widthCurve = trail.widthCurve;
+            m_Trail.widthMultiplier = trail.widthMultiplier;
+            m_Trail.time = trail.time;
+            m_Trail.colorGradient = trail.colorGradient;
         }
 
         public void Shoot(Transform muzzle, Vector3 target, string ignoreObject)
@@ -110,7 +126,7 @@ namespace ShooterCar.Utilities
             if (x != null) Debug.LogWarning(x);
 
             m_LongLife = 0;
-            m_Trail.Clear();
+            m_Trail?.Clear();
             ObjectPooling.Instance.ReturnBullet(gameObject);
         }
     }
