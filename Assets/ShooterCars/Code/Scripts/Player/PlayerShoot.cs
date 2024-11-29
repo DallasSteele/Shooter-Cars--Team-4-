@@ -59,7 +59,7 @@ namespace ShooterCar.Player
             if (Input.GetButton("Fire1"))
             {
                 GetTouchPosition();
-                m_Weapon.Shoot(hit.point, gameObject.tag);
+                m_Weapon.Shoot(hit.point, gameObject.tag, GameController.Instance.Line);
             }
             
             if(Input.GetButtonUp("Fire1"))

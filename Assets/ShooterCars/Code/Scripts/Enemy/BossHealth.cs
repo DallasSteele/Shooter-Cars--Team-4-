@@ -10,11 +10,12 @@ namespace ShooterCar.Enemy
 {
     public class BossHealth : HealthSystem
     {
-        [SerializeField] private BossShoot bossShoot;
+        [SerializeField] private BossShoot[] bossShoot;
         [SerializeField] private ParticleSystem explodeParticle;
         [SerializeField] private Animator anim;
 
         [SerializeField] private float duration;
+        [SerializeField] private float fireInterval = 7;
 
         private Slider healthBar;
 
@@ -44,7 +45,7 @@ namespace ShooterCar.Enemy
         {
             if (stopChecking) return;
 
-            if (currentDuration <= duration + 7)
+            if (currentDuration <= duration + fireInterval)
             {
                 currentDuration += Time.deltaTime;
             }
@@ -59,7 +60,10 @@ namespace ShooterCar.Enemy
 
         private void ResetBoss()
         {
-            bossShoot.SetFireInterval(7);
+            foreach (var item in bossShoot)
+            {
+                item.SetFireInterval(fireInterval);
+            }
         }
 
         protected override void InitialStatus()

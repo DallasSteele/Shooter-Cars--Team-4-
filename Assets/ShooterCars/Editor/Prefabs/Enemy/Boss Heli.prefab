@@ -8856,10 +8856,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MaxHealth: 500
-  bossShoot: {fileID: 8293160117550231945}
+  bossShoot:
+  - {fileID: 8293160117550231945}
   explodeParticle: {fileID: 637947835564184529}
   anim: {fileID: 4933656601664773948}
   duration: 30
+  fireInterval: 7
 --- !u!82 &6508694498395945222
 AudioSource:
   m_ObjectHideFlags: 0

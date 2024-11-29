@@ -54,7 +54,7 @@ namespace ShooterCar.SO
             m_NextShot = 0;
         }
 
-        public void Shoot(Vector3 target, string ignoreObject)
+        public void Shoot(Vector3 target, string ignoreObject, LineRenderer laser = null)
         {
             m_Muzzle.transform.LookAt(target);
             
@@ -62,11 +62,11 @@ namespace ShooterCar.SO
             {
                 Projectile bullet = ObjectPooling.Instance.GetBullet().GetComponent<Projectile>();
 
-                if (m_Weapon.BulletType == EnumStore.Bullet.Laser)
+                if (m_Weapon.BulletType == EnumStore.Bullet.Laser && laser != null)
                 {
-                    GameController.Instance.Line.enabled = true;
-                    GameController.Instance.Line.SetPosition(0, m_Muzzle.position);
-                    GameController.Instance.Line.SetPosition(1, target);
+                    laser.enabled = true;
+                    laser.SetPosition(0, m_Muzzle.position);
+                    laser.SetPosition(1, target);
                     ObjectPooling.Instance.GetLaserEffect().transform.position = target;
                 }
 

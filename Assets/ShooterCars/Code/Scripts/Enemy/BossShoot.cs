@@ -7,16 +7,16 @@ namespace ShooterCar.Enemy
 {
     public class BossShoot : ShootingSystem
     {
-        [SerializeField] private float m_Cooldown = 2;
+        [SerializeField] protected float m_Cooldown = 7;
 
-        private float m_FireInterval;
+        protected float m_FireInterval;
 
-        private Transform m_Player { get { return GameController.Instance.Player.transform; } }
+        protected Transform m_Player { get { return GameController.Instance.Player.transform; } }
 
         private void OnEnable()
         {
             m_FireInterval = m_Cooldown;
-            weaponModel.AddCollider();
+            //weaponModel.AddCollider();
         }
 
         private bool IsWeaponDestroyed()
