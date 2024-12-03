@@ -17,6 +17,6 @@ MonoBehaviour:
   m_BulletSpeed: 100
   m_FireRate: 15
   m_BulletType: 2
-  m_Model: {fileID: -6385670154585085709, guid: 018566b757c1ed744bd8c1ef78dfa5c1, type: 3}
+  m_Model: {fileID: 5356650275849782573, guid: 9a74ccc8a33d35340a84c7624175a354, type: 3}
   m_SFX: {fileID: 0}
   trail: {fileID: 0}
