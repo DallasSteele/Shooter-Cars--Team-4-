@@ -988,6 +988,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BombLauncher
       objectReference: {fileID: 0}
+    - target: {fileID: 1934026246301718416, guid: 55d2b917d6bbe244086ff7c2ebb7138e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8965927279815298960, guid: 55d2b917d6bbe244086ff7c2ebb7138e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.09011626
@@ -1154,6 +1158,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 264115031}
   m_CullTransparentMesh: 1
+--- !u!1001 &272461832
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: fb1726eab4ea96b40b7eedb388c9bd8a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.5745049
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fb1726eab4ea96b40b7eedb388c9bd8a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.859092
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fb1726eab4ea96b40b7eedb388c9bd8a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 16.54
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fb1726eab4ea96b40b7eedb388c9bd8a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fb1726eab4ea96b40b7eedb388c9bd8a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fb1726eab4ea96b40b7eedb388c9bd8a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fb1726eab4ea96b40b7eedb388c9bd8a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fb1726eab4ea96b40b7eedb388c9bd8a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fb1726eab4ea96b40b7eedb388c9bd8a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fb1726eab4ea96b40b7eedb388c9bd8a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fb1726eab4ea96b40b7eedb388c9bd8a, type: 3}
+      propertyPath: m_Name
+      value: tank model_rig (5)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fb1726eab4ea96b40b7eedb388c9bd8a, type: 3}
 --- !u!1 &278807767 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9cde77f6e38aa17459dc229286545504, type: 3}
@@ -1480,6 +1541,10 @@ PrefabInstance:
     - target: {fileID: 5256198605592126849, guid: 9a74ccc8a33d35340a84c7624175a354, type: 3}
       propertyPath: m_Name
       value: LaserTurret
+      objectReference: {fileID: 0}
+    - target: {fileID: 5256198605592126849, guid: 9a74ccc8a33d35340a84c7624175a354, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4881,3 +4946,4 @@ SceneRoots:
   - {fileID: 2279755723326651119}
   - {fileID: 184634374}
   - {fileID: 595557971}
+  - {fileID: 272461832}

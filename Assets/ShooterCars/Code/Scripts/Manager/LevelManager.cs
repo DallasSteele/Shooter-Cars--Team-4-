@@ -12,17 +12,20 @@ namespace ShooterCar.Enemy
         public GameObject lvlcompletepanel;
         public Button nextButton;
         public gameManager GameManager;
+        public LevelConfigure level {get; private set;}
 
-
+        [SerializeField] private LevelConfigure[] levels;
         [SerializeField] private EnemySpawner enemySpawner;
         [SerializeField] private BossSpawner bossSpawner;
 
         private bool isWaitingForNextLevel = false;
+        private int currentLevel;
 
         public void Start()
         {
             lvlcompletepanel?.SetActive(false);
             isWaitingForNextLevel = false;
+            level = levels[currentLevel];
 
             //add logics here
             //sub to boss defeated event
@@ -69,6 +72,7 @@ namespace ShooterCar.Enemy
         {
             // Hide the level complete panel and resume enemy spawning
             lvlcompletepanel?.SetActive(false);
+            currentLevel += 1;
             ResumeGame();
         }
 

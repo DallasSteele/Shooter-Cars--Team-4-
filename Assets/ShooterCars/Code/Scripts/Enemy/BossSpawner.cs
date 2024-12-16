@@ -47,7 +47,7 @@ namespace ShooterCar.Enemy
         {
             if (Boss == null)
             {
-                Boss = Instantiate(m_Boss, m_BossSpawnPos);
+                Boss = Instantiate(levelManager.level.boss, m_BossSpawnPos);
             }
 
             Boss.SetActive(true);
