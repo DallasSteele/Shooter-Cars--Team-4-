@@ -2,6 +2,7 @@ using System.Collections;
 
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Playables;
 
 using ShooterCar.Manager;
 using ShooterCar.BaseClass;
@@ -13,6 +14,7 @@ namespace ShooterCar.Enemy
         [SerializeField] private BossShoot[] bossShoot;
         [SerializeField] private ParticleSystem explodeParticle;
         [SerializeField] private Animator anim;
+        [SerializeField] private PlayableAsset spawnCam, destroyCam;
 
         [SerializeField] private float duration;
         [SerializeField] private float fireInterval = 7;
@@ -52,8 +54,7 @@ namespace ShooterCar.Enemy
             else
             {
                 GameController.Instance.OnBossDefeated();
-                anim.enabled = true;
-                anim.Play("Escape");
+                Animation();
                 stopChecking = true;
             }
         }
@@ -75,14 +76,34 @@ namespace ShooterCar.Enemy
                 MaxHealth();
 
             SetHealthBar();
+            CamCinematic(spawnCam);
         }
 
         protected override void Die()
         {
             GameController.Instance.OnBossDefeated();
+            CamCinematic(destroyCam);
             stopChecking = true;
             explodeParticle.Play();
             StartCoroutine(WaitForDestroy());
+            
+        }
+
+        private void CamCinematic(PlayableAsset asset)
+        {
+            if(asset != null)
+            {
+                GameController.Instance.Director.Play(asset);
+            }
+        }
+
+        private void Animation()
+        {
+            if(anim != null)
+            {
+                anim.enabled = true;
+                anim.Play("Escape");
+            }
         }
 
         private IEnumerator WaitForDestroy()

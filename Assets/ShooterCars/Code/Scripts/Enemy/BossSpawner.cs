@@ -51,7 +51,7 @@ namespace ShooterCar.Enemy
             }
 
             Boss.SetActive(true);
-            m_Director.Play(bossSpawn);
+            // m_Director.Play(bossSpawn);
 
             healthBar = InterfaceHandle.Instance.bossHealthBar.gameObject;
             healthBar.transform.parent.gameObject.SetActive(true);
@@ -67,7 +67,7 @@ namespace ShooterCar.Enemy
 
         private void DisableCurrentBoss()
         {
-            m_Director.Play(bossDefeat);
+            // m_Director.Play(bossDefeat);
             healthBar.transform.parent.gameObject.SetActive(false);
         }
 

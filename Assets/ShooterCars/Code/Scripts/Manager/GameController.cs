@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace ShooterCar.Manager
 {
@@ -7,6 +8,7 @@ namespace ShooterCar.Manager
         [SerializeField] private Camera m_Camera;
         [SerializeField] private GameObject m_PlayerObject;
         [SerializeField] private LineRenderer line;
+        [SerializeField] private PlayableDirector director;
 
         public delegate void GameAction();
         public GameAction OnGameStart { get; set; } = delegate { };
@@ -22,6 +24,7 @@ namespace ShooterCar.Manager
         public Camera MainCamera { get { return m_Camera; } }
         public GameObject Player { get { return m_PlayerObject; } }
         public LineRenderer Line { get { return line; } }
+        public PlayableDirector Director => director;
 
         public bool HoverButton { get; set; }
 

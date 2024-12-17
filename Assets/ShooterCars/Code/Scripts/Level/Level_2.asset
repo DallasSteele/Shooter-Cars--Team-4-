@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Level_2
   m_EditorClassIdentifier: 
   level: 2
-  boss: {fileID: 0}
+  boss: {fileID: 745304810912048537, guid: 54460cd0c7e221b42ae0665cd3f0f7ba, type: 3}

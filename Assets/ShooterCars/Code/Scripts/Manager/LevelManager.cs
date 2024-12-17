@@ -73,6 +73,7 @@ namespace ShooterCar.Enemy
             // Hide the level complete panel and resume enemy spawning
             lvlcompletepanel?.SetActive(false);
             currentLevel += 1;
+            level = levels[currentLevel];
             ResumeGame();
         }
 

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c99c4eef651e8b4cb5c428eb6e3ba46, type: 3}
+  m_Name: Machinegun 1
+  m_EditorClassIdentifier: 
+  m_DamageAmount: 15
+  m_DamageSpread: 0
+  m_BulletSpeed: 50
+  m_FireRate: 1.2
+  m_BulletType: 0
+  m_Model: {fileID: -4657284988429581127, guid: 096b9a5a69d012e4a84a20ba4ba2540f, type: 3}
+  m_SFX: {fileID: 8300000, guid: 1769422d53d2efd49aa0eef983ff64c5, type: 3}
+  trail: {fileID: 6719857316420412967, guid: 65ff63a6a2a3f654595388d9341a7b8a, type: 3}
