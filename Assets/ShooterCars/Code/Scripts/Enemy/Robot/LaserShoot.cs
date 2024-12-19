@@ -10,6 +10,12 @@ public class LaserShoot : BossShoot
 
     protected override void Shoot()
     {
+        if(IsWeaponDestroyed())
+        {
+            laserLine.gameObject.SetActive(false);
+            return;
+        }
+
         if (fire)
             m_Weapon.Shoot(m_Player.position, gameObject.tag, laserLine);
 

@@ -9,7 +9,7 @@ namespace ShooterCar.Enemy
     {
         [SerializeField] protected float m_Cooldown = 7;
 
-        protected float m_FireInterval;
+        public float m_FireInterval { get; protected set; }
 
         protected Transform m_Player { get { return GameController.Instance.Player.transform; } }
 
@@ -19,7 +19,7 @@ namespace ShooterCar.Enemy
             //weaponModel.AddCollider();
         }
 
-        private bool IsWeaponDestroyed()
+        protected bool IsWeaponDestroyed()
         {
             if (weaponModel == null)
                 return true;

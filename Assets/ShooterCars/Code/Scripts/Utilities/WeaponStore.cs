@@ -1,5 +1,6 @@
-using ShooterCar.BaseClass;
 using UnityEngine;
+
+using ShooterCar.BaseClass;
 
 namespace ShooterCar.Utilities
 {

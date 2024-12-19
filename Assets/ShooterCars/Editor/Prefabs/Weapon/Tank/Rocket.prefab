@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7505984093662511432}
   - component: {fileID: -5633859510582833641}
+  - component: {fileID: -2401134982322792467}
+  - component: {fileID: 2893210577977549236}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -46,6 +48,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Muzzle: {fileID: 7505984093662511432}
+--- !u!114 &-2401134982322792467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163124203744427267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49d2b4be9388d2341874c4b5e3b13e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MaxHealth: 50
+--- !u!65 &2893210577977549236
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163124203744427267}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.45, y: 0.55, z: 1}
+  m_Center: {x: -0.04, y: 0.14, z: 0}
 --- !u!1 &5382864251951768904
 GameObject:
   m_ObjectHideFlags: 0

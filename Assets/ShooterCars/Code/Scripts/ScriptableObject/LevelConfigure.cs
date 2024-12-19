@@ -7,4 +7,5 @@ public class LevelConfigure : ScriptableObject
 {
     public int level;
     public GameObject boss;
+    public float completeDelay;
 }

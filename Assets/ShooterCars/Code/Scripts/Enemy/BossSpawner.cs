@@ -20,6 +20,7 @@ namespace ShooterCar.Enemy
 
         private GameObject healthBar;
         private GameObject Boss { get; set; }
+        public float completeDelay { get; private set; }
 
         private void OnEnable()
         {

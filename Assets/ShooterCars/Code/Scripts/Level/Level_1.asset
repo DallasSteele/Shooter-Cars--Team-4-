@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Level_1
   m_EditorClassIdentifier: 
   level: 1
-  boss: {fileID: 745304810912048537, guid: 54460cd0c7e221b42ae0665cd3f0f7ba, type: 3}
+  boss: {fileID: 6718596833257775620, guid: a90e9e0e5f2b9c8469e371ca15498b38, type: 3}
+  completeDelay: 6

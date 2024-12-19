@@ -63,7 +63,7 @@ namespace ShooterCar.Enemy
 
         private IEnumerator ShowCompletePanel()
         {
-            yield return new WaitForSeconds(6);
+            yield return new WaitForSeconds(level.completeDelay);
 
             lvlcompletepanel?.SetActive(true);
         }
@@ -73,7 +73,9 @@ namespace ShooterCar.Enemy
             // Hide the level complete panel and resume enemy spawning
             lvlcompletepanel?.SetActive(false);
             currentLevel += 1;
+            if(currentLevel > levels.Length) currentLevel = 0;
             level = levels[currentLevel];
+            GameController.Instance.OnGameRestart();
             ResumeGame();
         }
 

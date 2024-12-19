@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 using ShooterCar.Manager;
 using ShooterCar.BaseClass;
@@ -64,6 +65,27 @@ namespace ShooterCar.Player
             
             if(Input.GetButtonUp("Fire1"))
                 GameController.Instance.Line.enabled = false;
+        }
+
+        private bool IsPointerOverUI()
+        {
+            // Untuk mouse di desktop
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return true;
+            }
+
+            // Untuk sentuhan di perangkat mobile
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+                if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
