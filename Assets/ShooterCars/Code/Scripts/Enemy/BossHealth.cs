@@ -55,6 +55,7 @@ namespace ShooterCar.Enemy
             {
                 GameController.Instance.OnBossDefeated();
                 Animation();
+                CamCinematic(destroyCam);
                 stopChecking = true;
             }
         }
@@ -85,7 +86,7 @@ namespace ShooterCar.Enemy
             CamCinematic(destroyCam);
             stopChecking = true;
             explodeParticle.Play();
-            StartCoroutine(WaitForDestroy());
+            // StartCoroutine(WaitForDestroy());
             
         }
 

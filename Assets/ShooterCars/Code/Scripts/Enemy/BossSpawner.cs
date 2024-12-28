@@ -74,7 +74,7 @@ namespace ShooterCar.Enemy
 
         private IEnumerator WaitForCinematic()
         {
-            yield return new WaitForSeconds(6);
+            yield return new WaitForSeconds(levelManager.level.completeDelay + 1);
             Destroy(Boss);
         }
     }

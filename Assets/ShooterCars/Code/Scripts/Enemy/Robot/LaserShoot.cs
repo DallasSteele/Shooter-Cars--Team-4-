@@ -16,7 +16,7 @@ public class LaserShoot : BossShoot
             return;
         }
 
-        if (fire)
+        if (fire && m_FireInterval <= 0)
             m_Weapon.Shoot(m_Player.position, gameObject.tag, laserLine);
 
         if (m_FireInterval >= 0)

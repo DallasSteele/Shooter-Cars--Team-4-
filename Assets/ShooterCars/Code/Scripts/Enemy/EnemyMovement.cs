@@ -23,7 +23,7 @@ namespace ShooterCar.Enemy
         {
             transform.position = Vector3.Lerp(transform.position, m_TargetPosition, m_MoveSpeed * Time.deltaTime);
 
-            if (Vector3.Distance(transform.position, m_TargetPosition) < 0.1f)
+            if (m_Limit != 0 && Vector3.Distance(transform.position, m_TargetPosition) < 0.1f)
             {
                 SetRandomTargetPosition();
             }
